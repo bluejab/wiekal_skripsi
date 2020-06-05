@@ -6,16 +6,16 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    public function edit($id)
+    public function edit()
     {
-       $user = \App\User::find($id);
+       $user = auth()->user();
        return view('user/edit',['user' =>$user]);
     }
 
     public function update(request $request, $id)
     {
-        $user = \App\User::find($id);
-        $user -> update($request->all());
+        $user = auth()->user();
+        $user->update($request->all());
 
         if(request()->has('fotoprofil')){
             $file = $request->file('fotoprofil');

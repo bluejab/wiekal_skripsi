@@ -36,7 +36,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="/profile/{{ Auth::user()->id }}/edit " class="nav-link">
+                <a href="{{ route('profile.edit') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Ubah Profile</p>
                 </a>

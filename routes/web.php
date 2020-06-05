@@ -21,10 +21,19 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-route::get('/band','BandController@index');
-route::get('/band/daftar','BandController@daftar');
-Route::post('/band/store', 'BandController@store');
-route::get('/profile/{id}/edit','UserController@edit');
-route::post('/profile/{id}/update','UserController@update');
-route::get('/band/bandsaya','BandController@bandsaya');
-route::get('/band/buatacara','BandController@buatacara');
+
+Route::group(['prefix' => 'band'], function() {
+    route::get('','BandController@index');
+    route::get('/daftar','BandController@daftar');
+    Route::post('/store', 'BandController@store');
+    route::get('/bandsaya','BandController@bandsaya');
+    route::get('/buatacara','BandController@buatacara');
+});
+
+
+Route::group(['prefix' => 'profile'], function() {
+    route::get('/edit','UserController@edit')->middleware('auth')->name('profile.edit');
+    route::post('/update','UserController@update')->middleware('auth')->name('profile.update');
+});
+
+
