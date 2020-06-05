@@ -22,12 +22,13 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 
-Route::group(['prefix' => 'band'], function() {
+Route::group(['prefix' => 'band', 'middleware' => 'auth'], function() {
     route::get('','BandController@index');
     route::get('/daftar','BandController@daftar');
     Route::post('/store', 'BandController@store');
-    route::get('/bandsaya','BandController@bandsaya');
+    route::get('/bandsaya','BandController@bandsaya')->name('band.saya');
     route::get('/buatacara','BandController@buatacara');
+    route::get('/anggota','BandController@anggota')->name('band.anggota');
 });
 
 

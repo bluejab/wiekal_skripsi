@@ -39,6 +39,11 @@ class User extends Authenticatable
     
     public function band()
     {
-        return $band->HasMany(User::class);
+        return $this->HasOne('App\Band', 'user_id', 'id');
+    }
+
+    public function alatMusik()
+    {
+        return $this->HasOne('App\AlatMusik' , 'id', 'alatmusik');
     }
 }

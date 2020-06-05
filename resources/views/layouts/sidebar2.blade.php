@@ -58,7 +58,7 @@
             </ul>
           </li>
           <li class="nav-item">
-            <a href="band/daftar" class="nav-link">
+            <a href="{{ route('band.anggota') }}" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Anggota

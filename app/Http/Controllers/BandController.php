@@ -40,8 +40,9 @@ class BandController extends Controller
             $logoname = time(). '.' . $logouploaded->getClientOriginalExtension();
             $logopath = public_path('/images/');
             $logouploaded->move($logopath,$logoname);
-            return Band::create([
+            Band::create([
             'nama_band' => $request->nama_band,
+            'user_id'=> auth()->user()->id,
             'kota' => $request->kota,
             'skill_member' => $request->skill_member,
             'genre' => $request->genre,
@@ -50,15 +51,16 @@ class BandController extends Controller
             ]);   
         }   
         
-        return Band::create([
-    		'nama_band' => $request->nama_band,
+        Band::create([
+            'nama_band' => $request->nama_band,
+            'user_id'=> auth()->user()->id,
             'kota' => $request->kota,
             'skill_member' => $request->skill_member,
             'genre' => $request->genre,
             'deskripsi' => $request->deskripsi
 
     	]);
-        return redirect('/band');
+        return redirect(route('band.saya'));
         
     }
 
@@ -71,5 +73,11 @@ class BandController extends Controller
     public function buatacara()
     {
        return view('band.buatacara');
+    }
+
+    public function anggota()
+    {
+        $user = auth()->user();
+        return $user->band;
     }
 }
