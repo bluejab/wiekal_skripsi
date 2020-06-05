@@ -22,7 +22,8 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
-    {   $databand = \App\Band::all();
+    {   
+        $databand = \App\Band::all();
         return view('layouts.utama',['databand'  => $databand]);
     }
 }

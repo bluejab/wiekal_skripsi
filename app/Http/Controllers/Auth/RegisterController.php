@@ -8,6 +8,7 @@ use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use App\AlatMusik;
 
 class RegisterController extends Controller
 {
@@ -57,7 +58,7 @@ class RegisterController extends Controller
             'umur' => ['required','int','max:100'],
             'kota' => ['required','string','max:100'],
             'gender' => ['required','string','max:10'],
-            'alatmusik' => ['required','string','max:100'],
+            'alatmusik' => ['required','max:100'],
             'genre' => ['required','string','max:100'],
             'fotoprofil' => ['sometimes','image','mimes:jpg,jpeg,bmp,svg,png','max:5000']
             
@@ -77,6 +78,7 @@ class RegisterController extends Controller
             $fotoprofilname = time(). '.' . $fotoprofiluploaded->getClientOriginalExtension();
             $fotoprofilpath = public_path('/images/');
             $fotoprofiluploaded->move($fotoprofilpath,$fotoprofilname);
+            
             return User::create([
                 'name' => $data['name'],
                 'email' => $data['email'],
@@ -103,5 +105,11 @@ class RegisterController extends Controller
         
             
         ]);
+    }
+
+    public function showRegistrationForm()
+    {
+        $alatMusik = AlatMusik::all();
+        return view("auth.register", compact("alatMusik"));
     }
 }

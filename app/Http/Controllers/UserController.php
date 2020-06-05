@@ -3,13 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\AlatMusik;
 
 class UserController extends Controller
 {
     public function edit()
     {
        $user = auth()->user();
-       return view('user/edit',['user' =>$user]);
+       $alatMusik = AlatMusik::all();
+       return view('user/edit',['user' =>$user, 'alatMusik' => $alatMusik]);
     }
 
     public function update(request $request, $id)
