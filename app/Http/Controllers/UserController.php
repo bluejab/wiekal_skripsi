@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\AlatMusik;
+use App\Genre;
 
 class UserController extends Controller
 {
@@ -11,7 +12,8 @@ class UserController extends Controller
     {
        $user = auth()->user();
        $alatMusik = AlatMusik::all();
-       return view('user/edit',['user' =>$user, 'alatMusik' => $alatMusik]);
+       $genreMusik = Genre::all();
+       return view('user/edit',['user' =>$user, 'alatMusik' => $alatMusik, 'genreMusik' => $genreMusik]);
     }
 
     public function update(request $request, $id)

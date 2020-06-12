@@ -12,11 +12,11 @@
       <!-- Sidebar user (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="{{ Auth::user()->fotoprofil }}" class="img-circle elevation-2" alt="User Image">
+          <img src="{{ Auth::user()->band->logo }}" class="img-circle elevation-2" alt="User Image">
         </div>
         
         <div class="info">
-          <a href="#" class="d-block">dfg</a>  
+          <a href="#" class="d-block">{{Auth::user()->band->nama_band}}</a>  
           <!-- Status -->
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
@@ -37,14 +37,20 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
+            <li class="nav-item">
+                <a href="carianggota" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Cari Anggota</p>
+                </a>
+              </li>
               <li class="nav-item">
-                <a href="/profile/{{ Auth::user()->id }}/edit " class="nav-link">
+                <a href="seleksi" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Seleksi Anggota</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="../../index.html" class="nav-link">
+                <a href="{{ route('band.edit') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Edit Band</p>
                 </a>
@@ -75,7 +81,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="band/daftar" class="nav-link">
+            <a href="{{ route('band.lihatacara') }}" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Lihat Acara
@@ -85,7 +91,7 @@
           </li>
 
           <li class="nav-item">
-            <a href="band/daftar" class="nav-link">
+            <a href="{{ route('band.tentang') }}" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Tentang

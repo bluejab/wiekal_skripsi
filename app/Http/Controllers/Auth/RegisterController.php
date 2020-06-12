@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use App\AlatMusik;
+use App\Genre;
 
 class RegisterController extends Controller
 {
@@ -59,7 +60,7 @@ class RegisterController extends Controller
             'kota' => ['required','string','max:100'],
             'gender' => ['required','string','max:10'],
             'alatmusik' => ['required','max:100'],
-            'genre' => ['required','string','max:100'],
+            'genre' => ['required','max:100'],
             'fotoprofil' => ['sometimes','image','mimes:jpg,jpeg,bmp,svg,png','max:5000']
             
         ]);
@@ -108,8 +109,12 @@ class RegisterController extends Controller
     }
 
     public function showRegistrationForm()
-    {
+    {  $genreMusik = Genre::all();
         $alatMusik = AlatMusik::all();
-        return view("auth.register", compact("alatMusik"));
+        return view("auth.register", compact("alatMusik","genreMusik"));
+       
     }
+
+
+   
 }

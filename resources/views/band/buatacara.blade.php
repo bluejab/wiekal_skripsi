@@ -15,6 +15,8 @@
   <link rel="stylesheet" href="/adminlte/dist/css/adminlte.min.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <link rel="stylesheet" href="/adminlte/plugins/airpicker/dist/css/datepicker.min.css">
+  <link rel="stylesheet" href="/adminlte/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -26,7 +28,7 @@
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="/adminlte/index3.html" class="nav-link">Home</a>
+        <a href="../../index3.html" class="nav-link">Home</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
         <a href="#" class="nav-link">Contact</a>
@@ -172,32 +174,49 @@
           <!-- left column -->
           <div class="col-md-12">
             <!-- jquery validation -->
-
             <div class="card card-primary">
-              <form role="form" id="quickForm">
+              <div class="card-header">
+                <h3 class="card-title">Quick Example <small>jQuery Validation</small></h3>
+              </div>
+              <!-- /.card-header -->
+              <!-- form start -->
+              <form role="form" id="quickForm" form method="post" action="/band/simpanacara">
+              {{ csrf_field() }}
                 <div class="card-body">
                   <div class="form-group">
-                 <label for="jenisacara" class="col-md-2 ">{{ __('Jenis Acara') }}</label>
-                        <input id="gender" type="radio" value= "Male" name="gender" required> Latihan
-                        <input id="gender" type="radio" value= "Female" name="gender" required> Konser
+                    <label for="jenis_acara" >Jenis Acara</label ><br>
+                    <input id="jenis_acara" type="radio" value= "Latihan" name="jenis_acara" required> Latihan
+                    <input id="jenis_acara" type="radio" value= "Konser" name="jenis_acara" required> Konser
+                    </div>
+                  <div class="form-group">
+                    <label for="lokasi">Lokasi</label>
+                    <input type="text" name="lokasi" class="form-control" id="lokasi" placeholder="Masukkan Lokasi" required>
                   </div>
                   <div class="form-group">
-                 <label for="lokasi" class="col-md-2 ">{{ __('Lokasi') }}</label>
-                        <input id="lokasi" type="text" name="lokasi" required>   
-                  </div>
-
-                  </div>
-                  <div class="form-group">
-                 <label for="tanggalmulai" class="col-md-2 ">{{ __('Tanggal Mulai') }}</label>
-                        <input id="tanggalmulai" type="text" name="tanggalmulai" required>   
-                  </div>
-
-                  </div>
-                  <div class="form-group">
-                 <label for="tanggalselesai" class="col-md-2 ">{{ __('Tanggal Selesai') }}</label>
-                        <input id="tanggalselesai" type="text" name="tanggalselesai" required>   
-                  </div>
+                    <label for="tanggal">Tanggal</label>
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                        <input type="text" name ="tanggal" id="tanggal" class="datepicker-here" data-language='en' required>
+                    </div>
+                  </div>     
                   
+                  <label for="waktu_mulai">Waktu Mulai</label>
+                  <div class="input-group-append" data-target="#waktu_mulai" data-toggle="datetimepicker">
+                    <div class="input-group-text"><i class="far fa-clock"></i></div>
+                       <div class="input-group date" data-target-input="nearest">
+                          <input type="text" name ="waktu_mulai" id="waktu_mulai" class="form-control datetimepicker-input" data-target="#waktu_mulai" required>
+                       </div>
+                  </div>
+
+                  <label for="waktu_selesai">Waktu Selesai</label>
+                  <div class="input-group-append" data-target="#waktu_selesai" data-toggle="datetimepicker">
+                    <div class="input-group-text"><i class="far fa-clock"></i></div>
+                       <div class="input-group date" data-target-input="nearest">
+                          <input type="text" name ="waktu_selesai" id="waktu_selesai" class="form-control datetimepicker-input" data-target="#waktu_selesai" required>
+                       </div>
+                  </div>
+
+                </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
                   <button type="submit" class="btn btn-primary">Submit</button>
@@ -236,64 +255,33 @@
 <!-- ./wrapper -->
 
 <!-- jQuery -->
-<script src="../../plugins/jquery/jquery.min.js"></script>
+<script src="/adminlte/plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
-<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- jquery-validation -->
-<script src="../../plugins/jquery-validation/jquery.validate.min.js"></script>
-<script src="../../plugins/jquery-validation/additional-methods.min.js"></script>
-<link rel="stylesheet" href="/adminlte/plugins/daterangepicker/daterangepicker.css">
+<script src="/adminlte/plugins/jquery-validation/jquery.validate.min.js"></script>
+<script src="/adminlte/plugins/jquery-validation/additional-methods.min.js"></script>
 <!-- AdminLTE App -->
+<script src="/adminlte/dist/js/adminlte.min.js"></script>
+<script src="/adminlte/plugins/airpicker/dist/js/datepicker.js"></script>
+<script src="/adminlte/plugins/airpicker/dist/js/i18n/datepicker.en.js"></script>
+<!-- TimePicker -->
+<script src="/adminlte/plugins/moment/moment.min.js"></script>
+<script src="/adminlte/plugins/inputmask/min/jquery.inputmask.bundle.min.js"></script>
 <script src="/adminlte/plugins/daterangepicker/daterangepicker.js"></script>
-<script src="../../dist/js/adminlte.min.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="../../dist/js/demo.js"></script>
-<script type="text/javascript">
+<script src="/adminlte/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+<script>
+   $(function () {
 
-$(document).ready(function () {
-  $.validator.setDefaults({
-    submitHandler: function () {
-      alert( "Form successful submitted!" );
-    }
-  });
-  $('#quickForm').validate({
-    rules: {
-      email: {
-        required: true,
-        email: true,
-      },
-      password: {
-        required: true,
-        minlength: 5
-      },
-      terms: {
-        required: true
-      },
-    },
-    messages: {
-      email: {
-        required: "Please enter a email address",
-        email: "Please enter a vaild email address"
-      },
-      password: {
-        required: "Please provide a password",
-        minlength: "Your password must be at least 5 characters long"
-      },
-      terms: "Please accept our terms"
-    },
-    errorElement: 'span',
-    errorPlacement: function (error, element) {
-      error.addClass('invalid-feedback');
-      element.closest('.form-group').append(error);
-    },
-    highlight: function (element, errorClass, validClass) {
-      $(element).addClass('is-invalid');
-    },
-    unhighlight: function (element, errorClass, validClass) {
-      $(element).removeClass('is-invalid');
-    }
-  });
-});
+    //Timepicker
+    $('#waktu_mulai').datetimepicker({
+      format: 'HH:mm'
+    })
+    $('#waktu_selesai').datetimepicker({
+      format: 'HH:mm'
+    })
+    
+  })
 </script>
 </body>
 </html>

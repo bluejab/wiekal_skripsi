@@ -127,8 +127,9 @@
 
                             <div class="col-md-6">
                             <select name="genre" id="genre">
-                                <option value="rock" {{$user->genre == "rock" ? 'selected' : ''}}> rock </option>
-                                <option value="koplo" {{$user->genre == "koplo" ? 'selected' : ''}}> koplo</option>
+                                < @foreach ($genreMusik as $item)
+                                    <option value={{$item->id}} {{$user->genre == $item->id ? 'selected' : ''}} >{{ $item->nama_genre }}</option>
+                                 @endforeach
                             </select>
                                 @error('genre')
                                     <span class="invalid-feedback" role="alert">

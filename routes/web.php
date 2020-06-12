@@ -27,8 +27,17 @@ Route::group(['prefix' => 'band', 'middleware' => 'auth'], function() {
     route::get('/daftar','BandController@daftar');
     Route::post('/store', 'BandController@store');
     route::get('/bandsaya','BandController@bandsaya')->name('band.saya');
-    route::get('/buatacara','BandController@buatacara');
+    route::get('/buatacara','BandController@buatacara')->name('band.buatacara');
+    Route::post('/simpanacara', 'BandController@simpanacara');
+    route::get('/lihatacara','BandController@lihatacara')->name('band.lihatacara');
     route::get('/anggota','BandController@anggota')->name('band.anggota');
+    route::get('/editband','BandController@editband')->name('band.edit');
+    route::post('/update','BandController@update')->middleware('auth')->name('band.update');
+    route::get('/seleksi','BandController@seleksianggota');
+    route::get('/carianggota','BandController@carianggota')->name('band.carianggota');
+    Route::post('/posting', 'BandController@posting');
+    route::get('/tentang','BandController@tentang')->name('band.tentang');
+    
 });
 
 

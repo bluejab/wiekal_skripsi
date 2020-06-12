@@ -15,4 +15,11 @@ class Band extends Model
     {
         return $this->hasOne('App\User','id','user_id');
     }
+
+    public function carianggota()
+    {
+        return $this->hasOne('App\CariAnggota','id','posting_id');
+    }
+
+    
 }

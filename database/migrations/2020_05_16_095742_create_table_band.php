@@ -15,8 +15,9 @@ class CreateTableBand extends Migration
     {
         Schema::create('band', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id')->nullable();
+            $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+      
             $table->string('nama_band');
             $table->string('genre');
             $table->string('skill_member');

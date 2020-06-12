@@ -46,4 +46,9 @@ class User extends Authenticatable
     {
         return $this->HasOne('App\AlatMusik' , 'id', 'alatmusik');
     }
+
+    public function genreMusik()
+    {
+        return $this->HasOne('App\Genre' , 'id', 'genre');
+    }
 }

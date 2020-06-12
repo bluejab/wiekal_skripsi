@@ -60,8 +60,9 @@
 
                             <div class="col-md-6">
                             <select name="genre" id="genre">
-                                <option value="rock"> rock </option>
-                                <option value="koplo"> koplo</option>
+                                @foreach ($genreMusik as $item)
+                                    <option value={{$item->id}}>{{ $item->nama_genre }}</option>
+                                @endforeach
                             </select>
                                 @error('genre')
                                     <span class="invalid-feedback" role="alert">
@@ -75,12 +76,9 @@
                             <label for="skill_member" class="col-md-4 col-form-label text-md-right">{{ __('Alat Musik') }}</label>
                             <div class="col-md-6">
                             <select name="skill_member[]" id="skill_member" class="select2" multiple="multiple" data-placeholder="Pilih yang anda butuh" data-dropdown-css-class="select2-blue" style="width: 100%;">
-                                <option>Bass</option>
-                                <option>Drum</option>
-                                <option>Gitar</option>
-                                <option>Piano</option>
-                                <option>Sexophone</option>
-                                <option>Vokalis</option>
+                                @foreach ($alatMusik as $item)
+                                    <option value={{$item->id}}>{{ $item->nama_alat_musik }}</option>
+                                @endforeach
                             </select>
                                 @error('skill_member')
                                     <span class="invalid-feedback" role="alert">
