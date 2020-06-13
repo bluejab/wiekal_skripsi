@@ -21,6 +21,9 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/home/apply', 'HomeController@apply')->name('home.apply');
+
+
 
 Route::group(['prefix' => 'band', 'middleware' => 'auth'], function() {
     route::get('','BandController@index');
@@ -32,7 +35,7 @@ Route::group(['prefix' => 'band', 'middleware' => 'auth'], function() {
     route::get('/lihatacara','BandController@lihatacara')->name('band.lihatacara');
     route::get('/anggota','BandController@anggota')->name('band.anggota');
     route::get('/editband','BandController@editband')->name('band.edit');
-    route::post('/update','BandController@update')->middleware('auth')->name('band.update');
+    route::post('/update/{id}','BandController@update')->middleware('auth')->name('band.update');
     route::get('/seleksi','BandController@seleksianggota');
     route::get('/carianggota','BandController@carianggota')->name('band.carianggota');
     Route::post('/posting', 'BandController@posting');

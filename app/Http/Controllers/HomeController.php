@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Band;
 
 class HomeController extends Controller
 {
@@ -22,8 +23,28 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
-    {   
-        $databand = \App\Band::all();
-        return view('layouts.utama',['databand'  => $databand]);
+    {
+        $data = [];
+        $user= auth()->user();
+        $band= $user->band;
+        if($band !== NULL){
+            $data['userBand'] = $band;
+        }
+
+        $data['databand'] = Band::all();
+
+        return view('layouts.utama',$data);
     }
+
+    public function apply()
+    {
+        return "heheh";
+        $this->validate($request,[
+ 
+            'jenis_acara' => 'required',      
+    
+        ]);
+
+    }
+
 }

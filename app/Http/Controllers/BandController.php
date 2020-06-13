@@ -26,8 +26,7 @@ class BandController extends Controller
     }
 
     public function store(Request $request)
-    {
-        
+    {   
     	$this->validate($request,[
             'nama_band' => 'required',
             'kota' => 'required',
@@ -37,38 +36,33 @@ class BandController extends Controller
             'deskripsi' => 'required',          
         ]);
         
-        $request->merge([ 
-            'skill_member' => implode(',', (array) $request->get('skill_member'))
-        ]);
+        // $request->merge([ 
+        //     'skill_member' => implode(',', (array) $request->get('skill_member'))
+        // ]);
         
         if(request()->has('logo')){
             $logouploaded = request()->file('logo');
             $logoname = time(). '.' . $logouploaded->getClientOriginalExtension();
             $logopath = public_path('/images/');
             $logouploaded->move($logopath,$logoname);
-            Band::create([
+            $band = Band::create([
             'nama_band' => $request->nama_band,
             'user_id'=> auth()->user()->id,
             'kota' => $request->kota,
-            'skill_member' => $request->skill_member,
             'genre' => $request->genre,
             'logo' => '/images/'.$logoname,
             'deskripsi' => $request->deskripsi
             ]);   
-            return redirect(route('band.saya'));
-        }   
-        
-        return Band::create([
-            'nama_band' => $request->nama_band,
-            'user_id'=> auth()->user()->id,
-            'kota' => $request->kota,
-            'skill_member' => $request->skill_member,
-            'genre' => $request->genre,
-            'deskripsi' => $request->deskripsi
-
-    	]);
-        redirect(route('band.saya'));
-        
+        }else{
+            $band = Band::create([
+                'nama_band' => $request->nama_band,
+                'user_id'=> auth()->user()->id,
+                'kota' => $request->kota,
+                'genre' => $request->genre,
+                'deskripsi' => $request->deskripsi
+            ]);
+        } 
+        return redirect()->route('band.saya');
     }
 
     public function bandsaya()
@@ -126,13 +120,15 @@ class BandController extends Controller
         $band = Band::all();
         $genreMusik = Genre::all();
         $alatMusik = AlatMusik::all();
-        return view('band.editband',['genreMusik' => $genreMusik,'alatMusik' => $alatMusik]);
+        $user = auth()->user();
+        return view('band.editband',['genreMusik' => $genreMusik,'alatMusik' => $alatMusik, 'user' => $user]);
     }
 
     public function update(request $request, $id)
     {
-        $band = Band::all();
-        $band->update($request->all());
+        $band = Band::find($id);
+        
+        $band->update($request->except('skill_member'));
 
         if(request()->has('fotoprofil')){
             $file = $request->file('fotoprofil');
@@ -157,27 +153,28 @@ class BandController extends Controller
     public function carianggota()
     {
         $alatMusik = AlatMusik::all();
-        $cari_anggota = CariAnggota::all();
-       return view('band.carianggota', ['alatMusik' => $alatMusik],['cari' => $cari_anggota]);
+        $bandId = auth()->user()->band->id;
+        $cari_anggota = CariAnggota::where('band_id',$bandId)->pluck('alatmusik_id');
+        return view('band.carianggota', ['alatMusik' => $alatMusik],['cari' => $cari_anggota]);
     
     }
     public function posting(Request $request)
     {
-        $alatMusik = AlatMusik::all();
+        $bandId = auth()->user()->band->id;
         $this->validate($request,[
  
             'keahlian_anggota' => 'required',       
         ]);
 
-        $request->merge([ 
-            'keahlian_anggota' => implode(',', (array) $request->get('keahlian_anggota'))
-        ]);
-      
-        CariAnggota::create([
-      
-            'keahlian_anggota' => $request->keahlian_anggota,
+        foreach($request->keahlian_anggota as $skill){
+            $cariAnggota = new CariAnggota;
 
-    	]);
+            $cariAnggota->band_id = $bandId;
+
+            $cariAnggota->alatmusik_id = $skill;
+    
+            $cariAnggota->save(); 
+        }
         return redirect(route('band.carianggota'));
     }
 
@@ -186,5 +183,7 @@ class BandController extends Controller
         $band = Band::all();
      return view('band.tentang');
     }
+
+  
     
 }

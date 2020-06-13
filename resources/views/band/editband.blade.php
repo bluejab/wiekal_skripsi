@@ -23,7 +23,7 @@
                     <br/>
                     <br/>
                     
-                    <form method="post" action="/band/update" enctype="multipart/form-data">
+                    <form method="post" action="{{ route('band.update', $user->band->id ) }}" enctype="multipart/form-data">
 
                         {{ csrf_field() }}
 

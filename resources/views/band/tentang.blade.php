@@ -171,7 +171,7 @@
         <div class="card-body">
           Nama Band : {{Auth::user()->band->nama_band}} <br><br>
           Kota Asal Band : {{Auth::user()->band->kota}} <br><br>
-          Bermain di Genre: {{Auth::user()->band->genre}} <br><br>
+          Bermain di Genre: {{Auth::user()->band->getGenre->nama_genre}} <br><br>
           Deskripsi mengenai band: {{Auth::user()->band->deskripsi}} 
         </div>
         <!-- /.card-body -->

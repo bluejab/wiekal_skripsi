@@ -17,10 +17,8 @@ class CreateTableBand extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-      
             $table->string('nama_band');
             $table->string('genre');
-            $table->string('skill_member');
             $table->string('kota');
             $table->string('logo')->default('/images/default-pp.jpg');
             $table->text('deskripsi');

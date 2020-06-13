@@ -15,7 +15,8 @@ class CreateCariAnggotaTable extends Migration
     {
         Schema::create('cari_anggota', function (Blueprint $table) {
             $table->id();
-            $table->string('keahlian_anggota');
+            $table->unsignedBigInteger('band_id');
+            $table->unsignedBigInteger('alatmusik_id');
             $table->timestamps();
         });
     }

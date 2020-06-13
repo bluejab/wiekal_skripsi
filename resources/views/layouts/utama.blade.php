@@ -1,21 +1,21 @@
  @extends('home')
 
  @section('content')
- <section class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1>Timeline</h1>
-          </div>
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Timeline</li>
-            </ol>
-          </div>
-        </div>
-      </div><!-- /.container-fluid -->
-    </section>
+<section class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>Timeline</h1>
+      </div>
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a href="#">Home</a></li>
+          <li class="breadcrumb-item active">Timeline</li>
+        </ol>
+      </div>
+    </div>
+  </div><!-- /.container-fluid -->
+</section>
 
     <!-- Main content -->
     <section class="content">
@@ -44,8 +44,8 @@
                   
                   </div>
                   <div class="timeline-footer">
-                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Lihat</button>
-                    <a class="btn btn-danger btn-sm">Delete</a>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal{{ $band->id }}">Lihat</button>
+                   
                   </div>
                  
                 </div>
@@ -65,24 +65,34 @@
         </div>
       </div>
       <!-- /.timeline -->
-      <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalCenterTitle">...</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        Membutuhkan Posisi : {{Auth::user()->Band->skill_member}}
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Apply</button>
-      </div>
-    </div>
-  </div>
-</div>
+      @foreach($databand->reverse() as $band)
+        <div class="modal fade" id="modal{{ $band->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle">...</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                Membutuhkan Posisi : 
+                
+                @foreach($band->cariAnggota as $item)
+                  {{$item->alatMusik->nama_alat_musik}}
+                @endforeach
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                @empty($userBand)
+                  <a href="{{ route('home.apply') }}" class="btn btn-primary">Apply</a>             
+                @endempty
+              
+              </div>
+            </div>
+          </div>
+        </div>
+      @endforeach
     </section>
+
 @endsection

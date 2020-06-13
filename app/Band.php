@@ -16,10 +16,13 @@ class Band extends Model
         return $this->hasOne('App\User','id','user_id');
     }
 
-    public function carianggota()
+    public function getGenre()
     {
-        return $this->hasOne('App\CariAnggota','id','posting_id');
+        return $this->hasOne('App\Genre','id','genre');
     }
-
     
+    public function cariAnggota()
+    {
+        return $this->hasMany('App\CariAnggota','band_id','id');
+    }
 }

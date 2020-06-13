@@ -165,7 +165,10 @@
                             <div class="col-md-10">
                             <select name="keahlian_anggota[]" id="keahlian_anggota" class="select2" multiple="multiple" data-placeholder="Pilih yang anda butuh" data-dropdown-css-class="select2-blue" style="width: 100%;">
                                 @foreach ($alatMusik as $item)
+                                  @if( in_array($item->id, $cari->toArray()) )
+                                  @else
                                     <option value={{$item->id}}>{{ $item->nama_alat_musik }}</option>
+                                  @endif
                                 @endforeach
                             </select>
                                 @error('keahlian_anggota')
