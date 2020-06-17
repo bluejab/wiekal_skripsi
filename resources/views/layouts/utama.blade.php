@@ -36,7 +36,7 @@
                 <i class="fas fa-user bg-purple"></i>
                 <div class="timeline-item">
                   <span class="time"><i class="fas fa-clock"></i>{{date('G:i', strtotime($band->created_at))}}</span>
-                  <h3 class="timeline-header"><a href="#">User</a> baru saja membuat band</h3>
+                  <h3 class="timeline-header"><a href="#">{{$band->user->name}}</a> baru saja membuat band</h3>
 
                   <div class="timeline-body">
                   <img src="{{ $band->logo }}" class="img-fluid img-thumbnail" style="height:60px;width60px;border-radius:50%;margin-right:15px" alt="Band Image">
@@ -85,7 +85,7 @@
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 @empty($userBand)
-                  <a href="{{ route('home.apply') }}" class="btn btn-primary">Apply</a>             
+                  <a href="/home/apply/{{$band->id}}" class="btn btn-primary">Apply</a>             
                 @endempty
               
               </div>

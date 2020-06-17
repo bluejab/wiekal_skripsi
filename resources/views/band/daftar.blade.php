@@ -16,12 +16,9 @@
         <div class="container">
             <div class="card mt-5">
                 <div class="card-header text-center">
-                    CRUD Data Pegawai - <strong>TAMBAH DATA</strong> - <a href="https://www.malasngoding.com/category/laravel" target="_blank">www.malasngoding.com</a>
+                <strong>Isi data berikut!!!!</strong>
                 </div>
                 <div class="card-body">
-                    <a href="/band" class="btn btn-primary">Kembali</a>
-                    <br/>
-                    <br/>
                     
                     <form method="post" action="/band/store" enctype="multipart/form-data">
 

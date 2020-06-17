@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 3 | DataTables</title>
+  <title>AdminLTE 3 | User Profile</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -11,14 +11,10 @@
   <link rel="stylesheet" href="/adminlte/plugins/fontawesome-free/css/all.min.css">
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-  <!-- DataTables -->
-  <link rel="stylesheet" href="/adminlte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
-  <link rel="stylesheet" href="/adminlte/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="/adminlte/dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="/adminlte//dist/css/adminlte.min.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -147,7 +143,7 @@
 
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
-  @include('layouts.sidebar2')
+
   </aside>
 
   <!-- Content Wrapper. Contains page content -->
@@ -157,12 +153,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Daftar Pengajuan Band</h1>
+            <h1>Profile</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">DataTables</li>
+              <li class="breadcrumb-item active">User Profile</li>
             </ol>
           </div>
         </div>
@@ -171,34 +167,98 @@
 
     <!-- Main content -->
     <section class="content">
-      <div class="container">
+      <div class="container-fluid">
         <div class="row">
-     <table class="table">
-       <tr>
-         <th>Nama</th>
-         <th>kota</th>
-         <th>keahlian</th>
-         <th>genre yang disukai</th>
-         <th>kelamin</th>
-         <th>umur</th>
-       </tr>
+          <div class="col-md-3">
 
-         @foreach( $calon as $calo)
-       <tr>
-       <th>{{$calo->getUserId->name}}</th>
-         <th>{{$calo->getUserId->kota}}</th>
-         <th>{{$calo->getUserId->alatmusik}}</th>
-         <th>{{$calo->getUserId->genre}}</th>
-         <th>{{$calo->getUserId->gender}}</th>
-         <th>{{$calo->getUserId->umur}}</th>
-         <td><a href="#" class="btn btn-warning btn-sm">Terima</a></td>
-         <td><a href="#" class="btn btn-warning btn-sm">Tolak</a></td>
-       </tr>
-       @endforeach
-       
-     </table>
-      </div>
-      </div>
+            <!-- Profile Image -->
+            <div class="card card-primary card-outline">
+              <div class="card-body box-profile">
+                <div class="text-center">
+                  <img class="profile-user-img img-fluid img-circle"
+                       src="{{ Auth::user()->fotoprofil }}"
+                       alt="User profile picture">
+                </div>
+
+                <h3 class="profile-username text-center">{{ Auth::user()->name }}</h3>
+
+                <p class="text-muted text-center">{{Auth::user()->alatMusik->nama_alat_musik}}</p>
+
+                <ul class="list-group list-group-unbordered mb-3">
+                  <li class="list-group-item">
+                    <b>Jenis Kelamin</b> <a class="float-right">{{Auth::user()->gender}}</a>
+                  </li>
+                  <li class="list-group-item">
+                    <b>Umur</b> <a class="float-right">{{Auth::user()->umur}}</a>
+                  </li>
+                  <li class="list-group-item">
+                    <b>Genre Kesukaan</b> <a class="float-right">{{Auth::user()->genreMusik->nama_genre}}</a>
+                  </li>                 
+                </ul>
+
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+
+            <!-- About Me Box -->
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">Kontak Saya</h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <strong><i class="fas fa-book mr-1"></i> Email</strong>
+
+                <p class="text-muted">
+                {{Auth::user()->email}}
+                </p>
+
+                <hr>
+
+                <strong><i class="fas fa-book mr-1"></i> No.Hp</strong>
+
+                <p class="text-muted">
+                {{Auth::user()->phone}}
+                </p>
+
+                <hr>
+
+                <strong><i class="fas fa-map-marker-alt mr-1"></i> Lokasi</strong>
+
+                <p class="text-muted"> {{Auth::user()->kota}}</p>
+
+                <hr>
+                
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+          <!-- /.col -->
+          <div class="col-md-9">
+            <div class="card">
+              <div class="card-header p-2">
+              <form action="/files" method="POST" enctype="multipart/form-data">
+                  @csrf
+                    <input type="text" name="keterangan" placeholder = "keterangan">
+                    <input type="file" name="file">
+                    <input type="submit" name="submit">
+                </form> 
+              </div><!-- /.card-header -->
+              <div class="card-body">
+                <div class="tab-content">
+                @include('user.view')
+                </div>
+                <!-- /.tab-content -->
+              </div><!-- /.card-body -->
+            </div>
+            <!-- /.nav-tabs-custom -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </div><!-- /.container-fluid -->
     </section>
     <!-- /.content -->
   </div>
@@ -223,36 +283,9 @@
 <script src="/adminlte/plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
 <script src="/adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- DataTables -->
-<script src="/adminlte/plugins/datatables/jquery.dataTables.min.js"></script>
-<script src="/adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-<script src="/adminlte/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-<script src="/adminlte/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
 <!-- AdminLTE App -->
 <script src="/adminlte/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="/adminlte/dist/js/demo.js"></script>
-<!-- page script -->
-<script>
-  $(function () {
-    $("#example1").DataTable({
-      "responsive": true,
-      "autoWidth": false,
-    });
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-      "responsive": true,
-    });
-  });
-</script>
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 </body>
 </html>
- 

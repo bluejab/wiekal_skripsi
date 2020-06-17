@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Band;
+use App\LamaranAnggota;
 
 class HomeController extends Controller
 {
@@ -36,14 +37,23 @@ class HomeController extends Controller
         return view('layouts.utama',$data);
     }
 
-    public function apply()
-    {
-        return "heheh";
-        $this->validate($request,[
- 
-            'jenis_acara' => 'required',      
-    
-        ]);
+    public function apply($id)
+    { 
+        $bandi = Band::find($id);
+        $user = Auth()->user()->id;
+       
+
+        LamaranAnggota::create([
+            
+      
+            'user_id' => request()->user()->id,
+            'band_id' => $bandi->id,    
+
+    	]);
+
+        return redirect(route('home'));
+
+       
 
     }
 

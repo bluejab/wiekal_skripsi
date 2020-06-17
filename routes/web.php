@@ -21,7 +21,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/home/apply', 'HomeController@apply')->name('home.apply');
+Route::get('/home/apply/{id}', 'HomeController@apply');
 
 
 
@@ -40,13 +40,17 @@ Route::group(['prefix' => 'band', 'middleware' => 'auth'], function() {
     route::get('/carianggota','BandController@carianggota')->name('band.carianggota');
     Route::post('/posting', 'BandController@posting');
     route::get('/tentang','BandController@tentang')->name('band.tentang');
-    
+
 });
 
 
 Route::group(['prefix' => 'profile'], function() {
     route::get('/edit','UserController@edit')->middleware('auth')->name('profile.edit');
-    route::post('/update','UserController@update')->middleware('auth')->name('profile.update');
+    route::post('/{id}/update','UserController@update')->middleware('auth')->name('profile.update');
+    Route::get('/ruanganku', 'UserController@create')->name('profile.ruanganku');
 });
+
+Route::post('/files','UserController@store');
+Route::get('/files','UserController@index');
 
 

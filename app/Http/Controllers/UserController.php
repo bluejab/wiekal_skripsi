@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\AlatMusik;
 use App\Genre;
+use App\Ruanganku;
 
 class UserController extends Controller
 {
@@ -33,4 +34,35 @@ class UserController extends Controller
         
         return redirect('/home')-> with ('sukses', 'Data berhasil diupdate');
     }
+
+
+    public function index($id)
+    {
+        $data=Ruanganku::find($id);
+        return view('user.view',compact('data')); 
+    }
+
+
+    public function create()
+    {
+        $data=Ruanganku::all();
+        return view('user.ruanganku',compact('data'));
+    }
+    
+    public function store(Request $request)
+    {
+        $data = new Ruanganku;
+        if($request->file('file')){
+            $file=$request->file('file');
+            $filename=time().'.'.$file->getClientOriginalExtension();
+            $request->file->move('storage/',$filename);
+
+            $data->file=$filename;
+        }
+        $data->user_id = auth()->user()->id;
+        $data->keterangan=$request->keterangan;
+        $data->save();
+        return redirect()->back();
+    }
+
 }

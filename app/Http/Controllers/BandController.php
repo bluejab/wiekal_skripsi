@@ -9,6 +9,7 @@ use App\AlatMusik;
 use App\Genre;
 use App\CariAnggota;
 use App\Acara;
+use App\LamaranAnggota;
 
 class BandController extends Controller
 {
@@ -62,7 +63,7 @@ class BandController extends Controller
                 'deskripsi' => $request->deskripsi
             ]);
         } 
-        return redirect()->route('band.saya');
+        return redirect(route('band.carianggota'));
     }
 
     public function bandsaya()
@@ -130,22 +131,23 @@ class BandController extends Controller
         
         $band->update($request->except('skill_member'));
 
-        if(request()->has('fotoprofil')){
-            $file = $request->file('fotoprofil');
+        if(request()->has('logo')){
+            $file = $request->file('logo');
             $extension = $file->getClientOriginalExtension();
             $filename = time() . '.' . $extension;
-            $file->move('uploads/user/', $filename);
-            $user->fotoprofil = '/uploads/user/'.$filename;
+            $file->move('uploads/band/', $filename);
+            $band->logo = '/uploads/band/'.$filename;
         }
 
         $band->save();
         
-        return redirect('/home')-> with ('sukses', 'Data berhasil diupdate');
+        return redirect(route('band.tentang'))-> with ('sukses', 'Data berhasil diupdate');
     }
 
     public function seleksianggota()
-    {
-       return view('band.seleksianggota');
+    {   
+        $calon = LamaranAnggota::all();
+       return view('band.seleksianggota', ['calon' => $calon]);
     }
 
     
@@ -183,7 +185,6 @@ class BandController extends Controller
         $band = Band::all();
      return view('band.tentang');
     }
-
   
     
 }

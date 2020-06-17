@@ -17,7 +17,7 @@
                     <br/>
                     <br/>
                     
-                    <form method="post" action="{{ route('profile.update') }}" enctype="multipart/form-data">
+                    <form method="post" action="{{ route('profile.update', $user->id) }}" enctype="multipart/form-data">
 
                         {{ csrf_field() }}
 
