@@ -192,7 +192,35 @@
          <th>{{$calo->getUserId->gender}}</th>
          <th>{{$calo->getUserId->umur}}</th>
          <td><a href="#" class="btn btn-warning btn-sm">Terima</a></td>
-         <td><a href="#" class="btn btn-warning btn-sm">Tolak</a></td>
+
+         <td>
+            <a href="#" class="btn btn-warning btn-sm"
+            onclick="event.preventDefault();
+                         document.getElementById('terima-{{$calo->id}}').submit();">
+              
+              <p>
+                Terima    
+              </p>
+            </a>
+            <form id="terima-{{$calo->id}}" action="{{ route('seleksi.terima',[$calo->id]) }}" method="POST" style="display: none;">
+                 @csrf 
+            </form>
+        </td>
+
+         <td>
+            <a href="#" class="btn btn-warning btn-sm"
+            onclick="event.preventDefault();
+                         document.getElementById('tolak-{{$calo->id}}').submit();">
+              
+              <p>
+                Tolak
+                
+              </p>
+            </a>
+            <form id="tolak-{{$calo->id}}" action="{{ route('seleksi.tolak',[$calo->id]) }}" method="DELETE" style="display: none;">
+                 @csrf 
+            </form>
+        </td>
        </tr>
        @endforeach
        

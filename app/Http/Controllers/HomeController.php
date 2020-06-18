@@ -27,12 +27,13 @@ class HomeController extends Controller
     {
         $data = [];
         $user= auth()->user();
+        $idBand=LamaranAnggota::where('user_id',$user->id)->pluck('band_id');
         $band= $user->band;
         if($band !== NULL){
             $data['userBand'] = $band;
         }
 
-        $data['databand'] = Band::all();
+        $data['databand'] = Band::whereNotIn('id',$idBand)->get();
 
         return view('layouts.utama',$data);
     }

@@ -10,6 +10,7 @@ use App\Genre;
 use App\CariAnggota;
 use App\Acara;
 use App\LamaranAnggota;
+use App\AnggotaBand;
 
 class BandController extends Controller
 {
@@ -146,10 +147,29 @@ class BandController extends Controller
 
     public function seleksianggota()
     {   
-        $calon = LamaranAnggota::all();
+        $user = auth()->user()->band->id;
+        $calon = LamaranAnggota::where('band_id',$user)->get();
        return view('band.seleksianggota', ['calon' => $calon]);
     }
 
+    public function tolak($id)
+    {   
+        $idCalon = LamaranAnggota::find($id)->delete();
+        return redirect()->back();
+    }
+
+    public function terima($id)
+    {   
+        $anggota = LamaranAnggota::find($id);
+        $bandId = auth()->user()->band->id;
+    
+        AnggotaBand::create([           
+            'user_id' => $anggota->id,
+            'band_id' => $bandId,   
+            
+        ]);
+
+    }
     
     
     public function carianggota()

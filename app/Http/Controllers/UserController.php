@@ -38,15 +38,17 @@ class UserController extends Controller
 
     public function index($id)
     {
-        $data=Ruanganku::find($id);
-        return view('user.view',compact('data')); 
+        $user = auth()->user()->id;
+        $data=Ruanganku::where('user_id',$user)->get();
+        return view('user.view', ['data' => $data]); 
     }
 
 
     public function create()
-    {
-        $data=Ruanganku::all();
-        return view('user.ruanganku',compact('data'));
+    { 
+        $user = auth()->user()->id;
+        $data=Ruanganku::where('user_id',$user)->get();
+        return view('user.ruanganku',['data' => $data]);
     }
     
     public function store(Request $request)

@@ -40,6 +40,8 @@ Route::group(['prefix' => 'band', 'middleware' => 'auth'], function() {
     route::get('/carianggota','BandController@carianggota')->name('band.carianggota');
     Route::post('/posting', 'BandController@posting');
     route::get('/tentang','BandController@tentang')->name('band.tentang');
+    Route::get('/seleksi/tolak/{id}','BandController@tolak')->name('seleksi.tolak');
+    Route::post('/seleksi/terima/{id}','BandController@terima')->name('seleksi.terima');
 
 });
 

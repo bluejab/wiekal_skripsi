@@ -143,7 +143,7 @@
 
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
-
+  @include('layouts.sidebar')
   </aside>
 
   <!-- Content Wrapper. Contains page content -->
@@ -239,7 +239,7 @@
           <div class="col-md-9">
             <div class="card">
               <div class="card-header p-2">
-              <form action="/files" method="POST" enctype="multipart/form-data">
+              <form action="/files" method="POST" enctype="multipart/form-data" name="hahah" id="hahah">
                   @csrf
                     <input type="text" name="keterangan" placeholder = "keterangan">
                     <input type="file" name="file">
