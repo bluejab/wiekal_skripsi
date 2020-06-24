@@ -35,15 +35,6 @@ class UserController extends Controller
         return redirect('/home')-> with ('sukses', 'Data berhasil diupdate');
     }
 
-
-    public function index($id)
-    {
-        $user = auth()->user()->id;
-        $data=Ruanganku::where('user_id',$user)->get();
-        return view('user.view', ['data' => $data]); 
-    }
-
-
     public function create()
     { 
         $user = auth()->user()->id;
@@ -65,6 +56,13 @@ class UserController extends Controller
         $data->keterangan=$request->keterangan;
         $data->save();
         return redirect()->back();
+    }
+
+    public function cekprofile($id)
+    {
+      $user = \App\User::find($id);
+      $data=Ruanganku::where('user_id',$user->id)->get();
+      return view ('user.cekprofile',['user'=>$user,'data' => $data]);
     }
 
 }

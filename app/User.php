@@ -51,4 +51,9 @@ class User extends Authenticatable
     {
         return $this->HasOne('App\Genre' , 'id', 'genre');
     }
+
+    public function AnggotaBandId()
+    {
+        return $this->HasOne('App\AnggotaBand' , 'user_id', 'id');
+    }
 }

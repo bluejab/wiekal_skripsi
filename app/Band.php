@@ -3,9 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 
 class Band extends Model
 {
+    use Notifiable;
+
     protected $table = 'band';
 
     protected $fillable = ['nama_band','user_id','genre','kota','skill_member','logo','deskripsi'];
@@ -24,5 +27,10 @@ class Band extends Model
     public function cariAnggota()
     {
         return $this->hasMany('App\CariAnggota','band_id','id');
+    }
+
+    public function AnggotaBandId()
+    {
+        return $this->HasMany('App\AnggotaBand' , 'band_id', 'id');
     }
 }

@@ -1,5 +1,5 @@
 <!-- Brand Logo -->
-    <a href="../../index3.html" class="brand-link">
+    <a href="/home" class="brand-link">
       <img src="/adminlte/img/AdminLTELogo.png"
            alt="AdminLTE Logo"
            class="brand-image img-circle elevation-3"
@@ -15,9 +15,8 @@
           <img src="{{ Auth::user()->fotoprofil }}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">{{ Auth::user()->name }}</a>  
+          <a href="#" i class="text-success" class="d-block">{{ Auth::user()->name }}</a>  
           <!-- Status -->
-          <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
       </div>
 

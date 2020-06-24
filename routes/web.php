@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Notifications\ApplyBaru;
+use App\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,10 +25,13 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/home/apply/{id}', 'HomeController@apply');
 
+route::get('/markasread', 'HomeController@MarkAsRead');
+
 
 
 Route::group(['prefix' => 'band', 'middleware' => 'auth'], function() {
     route::get('','BandController@index');
+    route::get('/sidebar2','BandController@sidebar2')->name('band.sidebar2');
     route::get('/daftar','BandController@daftar');
     Route::post('/store', 'BandController@store');
     route::get('/bandsaya','BandController@bandsaya')->name('band.saya');
@@ -53,6 +58,7 @@ Route::group(['prefix' => 'profile'], function() {
 });
 
 Route::post('/files','UserController@store');
-Route::get('/files','UserController@index');
+
+Route::get('/profile/ruanganku/{id}','UserController@cekprofile');
 
 

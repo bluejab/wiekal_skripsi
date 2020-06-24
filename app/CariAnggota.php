@@ -12,6 +12,16 @@ class CariAnggota extends Model
 
     public function alatMusik()
     {
-        return $this->hasOne('App\AlatMusik','id','alatmusik_id'); 
+        return $this->hasMany('App\AlatMusik','id','alatmusik_id'); 
+    }
+
+    public function user()
+    {
+        return $this->hasOne('App\User','id','user_id');
+    }
+
+    public function band()
+    {
+        return $this->hasOne('App\Band','id','band_id');
     }
 }

@@ -11,6 +11,7 @@ use App\CariAnggota;
 use App\Acara;
 use App\LamaranAnggota;
 use App\AnggotaBand;
+use Auth;
 
 class BandController extends Controller
 {
@@ -74,7 +75,7 @@ class BandController extends Controller
     }
     
     public function buatacara()
-    {
+    {   
        return view('band.buatacara');
     }
 
@@ -82,7 +83,7 @@ class BandController extends Controller
     {
 
         $this->validate($request,[
- 
+     
             'jenis_acara' => 'required',      
             'lokasi' => 'required', 
             'tanggal' => 'required', 
@@ -95,6 +96,7 @@ class BandController extends Controller
             $tanggalasli = $request->tanggal,
             $tanggalkonversi = date("Y-m-d", strtotime($tanggalasli)),
       
+            'band_id' => auth()->user()->band->id,
             'jenis_acara' => $request->jenis_acara,
             'lokasi' => $request->lokasi,
             'tanggal' => $tanggalkonversi,
@@ -107,14 +109,29 @@ class BandController extends Controller
 
     public function lihatacara()
     {
-        $acara= Acara::all();
+        $user = auth()->user()->band->id;
+        $acara = Acara::where('band_id',$user)->get();
         return view('band.lihatacara',['daftaracara' => $acara]);
     }
 
     public function anggota()
     {
         $user = auth()->user();
+        Auth()->user()->AnggotaBandId->getBandId->nama_band;
         return $user->band;
+    }
+
+    public function sidebar2()
+    {        
+        $user = auth()->user();
+        $band = Band::where('user_id',$user);
+        if($user == 4){
+            return ('mantap');
+        }else{
+            return ('lonte');
+        }
+        
+
     }
 
     public function editband()
@@ -162,12 +179,16 @@ class BandController extends Controller
     {   
         $anggota = LamaranAnggota::find($id);
         $bandId = auth()->user()->band->id;
+        
     
         AnggotaBand::create([           
-            'user_id' => $anggota->id,
+            'user_id' => $anggota->user_id,
             'band_id' => $bandId,   
             
         ]);
+        
+        $idCalon = LamaranAnggota::find($id)->delete();
+        return redirect()->back();
 
     }
     

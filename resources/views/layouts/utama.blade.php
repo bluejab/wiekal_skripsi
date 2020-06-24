@@ -36,10 +36,10 @@
                 <i class="fas fa-user bg-purple"></i>
                 <div class="timeline-item">
                   <span class="time"><i class="fas fa-clock"></i>{{date('G:i', strtotime($band->created_at))}}</span>
-                  <h3 class="timeline-header"><a href="#">{{$band->user->name}}</a> baru saja membuat band</h3>
+                  <h3 class="timeline-header"><a href="/profile/ruanganku/{{$band->band->user_id}}">{{$band->band->user->name}}</a> baru saja membuat band</h3>
 
                   <div class="timeline-body">
-                  <img src="{{ $band->logo }}" class="img-fluid img-thumbnail" style="height:60px;width60px;border-radius:50%;margin-right:15px" alt="Band Image">
+                  <img src="{{ $band->band->logo }}" class="img-fluid img-thumbnail" style="height:60px;width60px;border-radius:50%;margin-right:15px" alt="Band Image">
                   {{$band->nama_band}} 
                   
                   </div>
@@ -75,12 +75,11 @@
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
-              <div class="modal-body">
-                Membutuhkan Posisi : 
-                
-                @foreach($band->cariAnggota as $item)
-                  {{$item->alatMusik->nama_alat_musik}}
+              <div class="modal-body"> 
+                @foreach($band->alatMusik as $item)
+                  {{$item->nama_alat_musik}}
                 @endforeach
+                            
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

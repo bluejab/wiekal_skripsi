@@ -15,6 +15,8 @@ class CreateAcaraTable extends Migration
     {
         Schema::create('acara', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('band_id');
+            $table->foreign('band_id')->references('id')->on('band')->onDelete('cascade');
             $table->string('jenis_acara');
             $table->text('lokasi');
             $table->date('tanggal');
