@@ -169,10 +169,10 @@
       <div class="card">
         
         <div class="card-body">
-          Nama Band : {{Auth::user()->band->nama_band}} <br><br>
-          Kota Asal Band : {{Auth::user()->band->kota}} <br><br>
-          Bermain di Genre: {{Auth::user()->band->getGenre->nama_genre}} <br><br>
-          Deskripsi mengenai band: {{Auth::user()->band->deskripsi}} 
+          Nama Band : {{$userBand->nama_band}} <br><br>
+          Kota Asal Band : {{$userBand->kota}} <br><br>
+          Bermain di Genre: {{$userBand->getGenre->nama_genre}} <br><br>
+          Deskripsi mengenai band: {{$userBand->deskripsi}} 
         </div>
         <!-- /.card-body -->
       

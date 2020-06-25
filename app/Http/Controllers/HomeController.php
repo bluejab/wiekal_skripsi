@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 use App\Band;
 use App\LamaranAnggota;
 use App\User;
-use App\CariAnggota;
 use App\Notifications\ApplyBaru;
+use App\AnggotaBand;
 use Illuminate\Support\Facades\Route;
 
 class HomeController extends Controller
@@ -33,28 +33,41 @@ class HomeController extends Controller
         $user= auth()->user();
         $idBand=LamaranAnggota::where('user_id',$user->id)->pluck('band_id');
         $band= $user->band;
-        if($band !== NULL){
-            $data['userBand'] = $band;
-        }
+        $anggotaband = AnggotaBand::where('user_id',$user->id)->pluck('band_id');
 
-       // $data['databand'] = Band::whereNotIn('id',$idBand)->get();
-        $data['databand'] = CariAnggota::whereNotIn('band_id',$idBand)->get();
+        if($band !== NULL){
+            
+            $data['userBand'] = $band;
+            
+        }
+        if(count($anggotaband) > 0 ){
+            $data['userBand'] = $anggotaband;
+        }
+        
+        $idAlatmusikuser = $user->alatMusik->id;
+        
+        $dataBand = Band::whereNotIn('id',$idBand)->with(['cariAnggota' => function ($q) use($idAlatmusikuser){
+            return $q->where('alatmusik_id',$idAlatmusikuser);
+        }])->get();
+
+        // return $dataBand;
+        $data['databand'] = $dataBand;
+
 
         return view('layouts.utama',$data);
     }
 
     public function apply($id)
     { 
-       // $bandi = Band::find($id);
-        //$bandii = $bandi->user;
-        $bandi = CariAnggota::find($id);
-        $bandii = $bandi->band->user;
+        $bandi = Band::find($id);
+        $bandii = $bandi->user;
         $user = Auth()->user()->id;
 
         LamaranAnggota::create([
-                 
+            
+      
             'user_id' => request()->user()->id,
-            'band_id' => $bandi->band_id,    
+            'band_id' => $bandi->id,    
 
         ]);
  
@@ -72,3 +85,4 @@ class HomeController extends Controller
     }
 
 }
+

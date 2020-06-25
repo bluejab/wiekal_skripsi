@@ -124,7 +124,10 @@ class BandController extends Controller
     public function sidebar2()
     {        
         $user = auth()->user();
-        $band = Band::where('user_id',$user);
+        $band = Band::where('user_id',$user)->first();
+        if(count($band)>0){
+            return ('layouts.sidebar');
+        }
         if($user == 4){
             return ('mantap');
         }else{
@@ -223,8 +226,20 @@ class BandController extends Controller
 
     public function tentang()
     {
-        $band = Band::all();
-     return view('band.tentang');
+        $data = [];
+        $user= auth()->user();
+        $band= $user->band;
+        $anggotaband = AnggotaBand::where('user_id',$user->id)->first();
+
+        if($band !== NULL){
+            $data['ketua'] = TRUE;
+            $data['userBand'] = $band;
+            
+        }
+        if($anggotaband !== NULL ){
+            $data['userBand'] = $anggotaband->getBandId;
+        }
+        return view('band.tentang',$data);
     }
   
     
