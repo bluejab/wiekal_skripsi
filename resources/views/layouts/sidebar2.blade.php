@@ -62,11 +62,35 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="../../index.html" class="nav-link">
-                  <i class="nav-icon far fa-times-circle" style="color:crimson"></i>
-                  <p>Bubarkan Band</p>
-                </a>
-              </li>
+            <a href="band/daftar" class="nav-link" data-toggle="modal" data-target="#exampleModalCenter2">
+            <i class="nav-icon far fa-times-circle" style="color:crimson"></i>
+            <p>
+                Keluar Band
+              </p>
+            </a>
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModalCenter2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle2" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle2"><i class="nav-icon fas fa-exclamation-triangle" style="color:red"></i></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        Anda yakin ingin membubarkan band?
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                        <a href="/bubar" class="btn btn-primary">Iya</a>
+                       
+                      </div>
+                    </div>
+                  </div>
+                </div>
+   
+          </li>
             </ul>
           </li>
           <li class="nav-item">

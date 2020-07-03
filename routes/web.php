@@ -25,6 +25,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/home/apply/{id}', 'HomeController@apply');
 Route::get('/keluar', 'BandController@keluar');
+Route::get('/bubar', 'BandController@bubar');
 
 route::get('/markasread', 'HomeController@MarkAsRead');
 

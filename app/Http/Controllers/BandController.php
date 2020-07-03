@@ -127,12 +127,14 @@ class BandController extends Controller
 
     public function lihatacara()
     {
-        
+        $now= Carbon::now();
         $user = auth()->user()->AnggotaBandId->band_id;
-        $acara = Acara::where('band_id',$user)->get();
+        $acaraBerlangsung = Acara::where('band_id',$user)->where('tanggal','>=',$now->format('Y-m-d'))->get();
+        $acaraLewat = Acara::where('band_id',$user)->where('tanggal','<=',$now->format('Y-m-d'))->get();
         $data = [];
         $userr = auth()->user();
         $band= $userr->band;
+
 
         // foreach ($acara as $acaraa){
         // $newDT = date('Y-m-d H:i:s', strtotime("$acara->tanggal $acara->waktu_mulai"));
@@ -151,8 +153,12 @@ class BandController extends Controller
             $data['ketua'] = TRUE;
             $data['userBand'] = $band;
         }
+        $data['acaraBerlangsung'] = $acaraBerlangsung;
+        $data['acaraLewat'] = $acaraLewat;
+        $data['now'] = $now;
 
-        return view('band.lihatacara',$data,['daftaracara' => $acara]);
+
+        return view('band.lihatacara',$data);
     }
 
     public function anggota()
@@ -212,14 +218,25 @@ class BandController extends Controller
     {   
         $user = auth()->user()->band->id;
         $calon = LamaranAnggota::where('band_id',$user)->get();
-       return view('band.seleksianggota', ['calon' => $calon]);
+
+        $data = [];
+        $user = auth()->user();
+        $band= $user->band;
+        if($band !== NULL){
+            $data['ketua'] = TRUE;
+            $data['userBand'] = $band;
+        }
+   
+        $data['calon'] =$calon;
+
+       return view('band.seleksianggota', $data);
     }
 
     public function tolak($id)
     {   
         $anggota = LamaranAnggota::find($id);
         
-        Mail::to($anggota->getUserId->email)->send(new TolakAnggota());
+        // Mail::to($anggota->getUserId->email)->send(new TolakAnggota());
 
         $idCalon = LamaranAnggota::find($id)->delete();
         return redirect()->back();
@@ -243,7 +260,7 @@ class BandController extends Controller
         //return $goblok;
         
         
-        Mail::to($anggota->getUserId->email)->send(new TerimaAnggota());
+        // Mail::to($anggota->getUserId->email)->send(new TerimaAnggota());
         
         $idCalon = LamaranAnggota::find($id)->delete();
         return redirect()->back();
@@ -255,9 +272,22 @@ class BandController extends Controller
     {
         
         $alatMusik = AlatMusik::all();
+        // $tos = CariAnggota::
+        // $tes = AlatMusik::where('id')->pluck('alatmusik_id');
+        // return $tes;
+        $data = [];
+        $user = auth()->user();
+        $band= $user->band;
+        if($band !== NULL){
+            $data['ketua'] = TRUE;
+            $data['userBand'] = $band;
+        }
+   
         $bandId = auth()->user()->band->id;
         $cari_anggota = CariAnggota::where('band_id',$bandId)->pluck('alatmusik_id');
-        return view('band.carianggota', ['alatMusik' => $alatMusik],['cari' => $cari_anggota]);
+        $data['alatMusik'] = $alatMusik;
+        $data['cari'] = $cari_anggota;
+        return view('band.carianggota', $data);
     
     }
     public function posting(Request $request)
@@ -301,8 +331,29 @@ class BandController extends Controller
     public function keluar()
     {
         $user= auth()->user();
-        $keluar = AnggotaBand::where('user_id',$user->id)->delete();
-        return redirect(route('home'));
+        $keluar = Band::where('user_id',$user->id)->first();
+        if($keluar){
+            return $keluar;
+            // return view modal radio button anggota
+        }
+        else{
+            $out = AnggotaBand::where('user_id',$user->id)->first();
+            $out->delete();
+        }
+
+        // return redirect(route('home'));
+    }
+
+    public function bubar()
+    {   
+        $user= auth()->user();
+        $bubar = AnggotaBand::where('band_id',$user->band->id)->get();
+        foreach($bubar as $bubarr){
+            $bubarr->Delete();
+        }
+
+        return $bubar;
+        
     }
   
     
