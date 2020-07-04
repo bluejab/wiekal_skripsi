@@ -34,25 +34,27 @@ class HomeController extends Controller
         $idBand=LamaranAnggota::where('user_id',$user->id)->pluck('band_id');
         $band= $user->band;
         $anggotaband = AnggotaBand::where('user_id',$user->id)->pluck('band_id');
-
-        if($band !== NULL){
-            
-            $data['userBand'] = $band;
-            
+        
+        if($band !== NULL){           
+            $data['userBand'] = $band;           
         }
+        
         if(count($anggotaband) > 0 ){
             $data['userBand'] = $anggotaband;
         }
-        
-        $idAlatmusikuser = $user->alatMusik->id;
+
+       $idAlatmusikuser = $user->alatMusik->id;
         
         $dataBand = Band::whereNotIn('id',$idBand)->with(['cariAnggota' => function ($q) use($idAlatmusikuser){
-            return $q->where('alatmusik_id',$idAlatmusikuser);
-        }])->get();
+         return $q->where('alatmusik_id',$idAlatmusikuser);
+      }])->get();
 
-        // return $dataBand;
-        $data['databand'] = $dataBand;
+       $data['databand'] = $dataBand;
 
+       if($band !== NULL){
+        $dataa['ketua'] = TRUE;
+        $dataa['userBand'] = $band;
+    }
 
         return view('layouts.utama',$data);
     }

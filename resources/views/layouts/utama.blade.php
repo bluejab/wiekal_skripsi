@@ -2,19 +2,7 @@
 
 @section('content')
 <section class="content-header">
- <div class="container-fluid">
-   <div class="row mb-2">
-     <div class="col-sm-6">
-       <h1>Timeline</h1>
-     </div>
-     <div class="col-sm-6">
-       <ol class="breadcrumb float-sm-right">
-         <li class="breadcrumb-item"><a href="#">Home</a></li>
-         <li class="breadcrumb-item active">Timeline</li>
-       </ol>
-     </div>
-   </div>
- </div><!-- /.container-fluid -->
+ 
 </section>
 
    <!-- Main content -->
@@ -27,17 +15,17 @@
            <div class="timeline">
              <!-- timeline time label -->
              <div class="time-label">
-               <span class="bg-red">10 Feb. 2014</span>
+               <span class="bg-green">Terbaru</span>
              </div>
              <!-- /.timeline-label -->
              <!-- timeline item -->
              @foreach($databand->reverse() as $band)
              @if(count($band->cariAnggota) > 0)
              <div>           
-               <i class="fas fa-user bg-purple"></i>
+               <i class="fas fa-user bg-black"></i>
                <div class="timeline-item">
-                 <span class="time"><i class="fas fa-clock"></i>{{date('G:i', strtotime($band->created_at))}}</span>
-                 <h3 class="timeline-header"><a href="/profile/ruanganku/{{$band->user->id}}">{{$band->user->name}}</a> baru saja membuat band</h3>
+                 <span class="time"><i class="fas fa-clock"></i> {{date("d-m-Y" , strtotime($band->created_at))}}</span>
+                 <h3 class="timeline-header"><a href="/profile/ruanganku/{{$band->user->id}}">{{$band->user->name}}</a> membuat band {{$band->getGenre->nama_genre}}</h3>
 
                  <div class="timeline-body">
                  <img src="{{ $band->logo }}" class="img-fluid img-thumbnail" style="height:60px;width60px;border-radius:50%;margin-right:15px" alt="Band Image">
@@ -55,7 +43,7 @@
              @endforeach
            
              <div class="time-label">
-               <span class="bg-green">3 Jan. 2014</span>
+               <span class="bg-red">Terlama</span>
              </div>
             
              <div>
@@ -73,16 +61,21 @@
          <div class="modal-dialog modal-dialog-centered" role="document">
            <div class="modal-content">
              <div class="modal-header">
-               <h5 class="modal-title" id="exampleModalCenterTitle">...</h5>
+               <h5 class="modal-title" id="exampleModalCenterTitle"><i class="fas fa-circle fa-1x" style="color:crimson"></i>
+               <i class="fas fa-circle fa-1x" style="color:cornflowerblue"></i> <i class="fas fa-circle fa-1x" style="color:khaki"></i>
+               
+               </h5>
                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                  <span aria-hidden="true">&times;</span>
                </button>
              </div>
              <div class="modal-body">
-               Membutuhkan Posisi : 
+                Domisili  :  {{$band->kota}} <br> <br>
+                Deskripsi : {{$band->deskripsi}} <br> <br>
+<!-- 
                @foreach($band->cariAnggota as $item)              
                  {{$item->alatMusik->nama_alat_musik}}
-               @endforeach
+               @endforeach -->
              </div>
              <div class="modal-footer">
                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

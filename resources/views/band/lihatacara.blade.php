@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 3 | DataTables</title>
+  <title>My Band</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -34,19 +34,7 @@
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1>Daftar Acara</h1>
-          </div>
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">DataTables</li>
-            </ol>
-          </div>
-        </div>
-      </div><!-- /.container-fluid -->
+     
     </section>
 
     <!-- Main content -->
@@ -55,34 +43,71 @@
         <div class="col-12">
           <div class="card">
             <div class="card-body">
-              <table id="example2" class="table table-bordered table-hover">
-                <thead>
-                <tr>
-                <th>Jenis Acara</th>
-                  <th>Lokasi</th>
-                  <th>Tanggal Mulai</th>
-                  <th>Waktu Mulai</th>
-                  <th>Waktu Selesai</th>
-                </tr>
-                </thead>
-                <input type="submit" class="btn btn-success" value="Sedang Berlangsung">
-                <input type="submit" class="btn btn-danger" value="Sudah Terlewat">
-                <tbody>
-                @foreach($daftaracara as $acara)
-                <tr>
-                  <td>{{$acara->jenis_acara}}</td>
-                  <td>{{$acara->lokasi}}</td>
-                  <td>{{$acara->tanggal}}</td>
-                  <td>{{$acara->waktu_mulai}}</td>
-                  <td>{{$acara->waktu_selesai}}</td>
-                </tr> 
-                @endforeach
-                </tbody>
-              </table>
+              <ul class="nav nav-pills">
+                <li class="nav-item"><a class="nav-link active" href="#berlangsung" data-toggle="tab">Masih Berlangsung</a></li>
+                <li class="nav-item"><a class="nav-link" href="#terjadi" data-toggle="tab">Sudah Terjadi</a></li>
+              </ul>
+              
+              <div class="card-body">
+                <div class="tab-content">
+                  <div class="active tab-pane" id="berlangsung">
+                    <table id="example2" class="table table-bordered table-hover">
+                      <thead>
+                      <tr>
+                      <th>Jenis kontol</th>
+                        <th>Lokasi</th>
+                        <th>Tanggal Mulai</th>
+                        <th>Waktu Mulai</th>
+                        <th>Waktu Selesai</th>
+                      </tr>
+                      </thead>
+                      @foreach($daftaracara as $acara)
+                      <tr>
+                        <td>{{$acara->jenis_acara}}</td>
+                        <td>{{$acara->lokasi}}</td>
+                        <td>{{date("m-d-Y", strtotime($acara->tanggal))}}</td>
+                        <td>{{date("G:i", strtotime($acara->waktu_mulai))}}</td>
+                        <td>{{date("G:i", strtotime($acara->waktu_selesai))}}</td>
+                      </tr> 
+                      @endforeach
+                    </table>
+                  </div>
+
+                  <div class="tab-pane" id="terjadi">
+                    <table id="example3" class="table table-bordered table-hover">
+                      <thead>
+                      <tr>
+                      <th>Jenis Acara</th>
+                        <th>Lokasi</th>
+                        <th>Tanggal Mulai</th>
+                        <th>Waktu Mulai</th>
+                        <th>Waktu Selesai</th>
+                      </tr>
+                      </thead>
+                      @foreach($daftaracara as $acara)
+                      <tr>
+                      <td>{{$acara->jenis_acara, '>', Carbon\Carbon::now()}}</td>
+                      <td>{{$acara->lokasi , '>', Carbon\Carbon::now()}}</td>
+                      <td>{{$acara->tanggal , '>', Carbon\Carbon::now()}}</td>
+                      <td>{{$acara->waktu_mulai , '>', Carbon\Carbon::now()}}</td>
+                      <td>{{$acara->waktu_selesai , '>', Carbon\Carbon::now()}}</td>
+                        <!-- <td>{{$acara->jenis_acara}}</td>
+                        <td>{{$acara->lokasi}}</td>
+                        <td>{{date("m-d-Y", strtotime($acara->tanggal))}}</td>
+                        <td>{{date("G:i", strtotime($acara->waktu_mulai))}}</td>
+                        <td>{{date("G:i", strtotime($acara->waktu_selesai))}}</td> -->
+                      </tr> 
+                      @endforeach
+                    </table>
+                  </div>
+                  
+                </div>  
+              </div>     
+
             </div>
-            <!-- /.card-body -->
+          
           </div>
-          <!-- /.card -->
+         
         </div>
         <!-- /.col -->
       </div>
@@ -93,10 +118,9 @@
   <!-- /.content-wrapper -->
   <footer class="main-footer">
     <div class="float-right d-none d-sm-block">
-      <b>Version</b> 3.0.4
+    <strong>&copy; 2020, </strong> Wiekal/15420959
     </div>
-    <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong> All rights
-    reserved.
+    <strong>⠀</strong>
   </footer>
 
   <!-- Control Sidebar -->
@@ -128,6 +152,16 @@
       "autoWidth": false,
     });
     $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+      "responsive": true,
+    });
+
+    $('#example3').DataTable({
       "paging": true,
       "lengthChange": false,
       "searching": false,

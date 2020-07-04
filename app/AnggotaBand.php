@@ -8,7 +8,7 @@ class AnggotaBand extends Model
 {
     protected $table = 'anggota_band';
 
-    protected $fillable = ['band_id','user_id'];
+    protected $fillable = ['band_id','user_id','alatmusik_id'];
 
     public function getUserId()
     {
@@ -18,5 +18,10 @@ class AnggotaBand extends Model
     public function getBandId()
     {
         return $this->hasOne('App\Band','id','band_id');
+    }
+
+    public function alatMusik()
+    {
+        return $this->HasOne('App\AlatMusik' , 'id', 'alatmusik_id');
     }
 }

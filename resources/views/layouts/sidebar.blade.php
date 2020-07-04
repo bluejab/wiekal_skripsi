@@ -1,6 +1,6 @@
 <!-- Brand Logo -->
     <a href="/home" class="brand-link">
-      <img src="/adminlte/img/AdminLTELogo.png"
+      <img src="/adminlte/img/mybandlogo.png"
            alt="AdminLTE Logo"
            class="brand-image img-circle elevation-3"
            style="opacity: .8">
@@ -27,7 +27,7 @@
                with font-awesome or any other icon font library -->
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <i class="nav-icon far fa-user"></i>
               <p>
                 Profilku
                 <i class="right fas fa-angle-left"></i>
@@ -36,30 +36,29 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="{{ route('profile.edit') }}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                <i class="nav-icon far fa-edit text-warning"></i>
                   <p>Ubah Profile</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{{ route('profile.ruanganku') }}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="nav-icon fas fa-home" style="color:lightskyblue"></i>
                   <p>Ruanganku</p>
                 </a>
               </li>
             </ul>
           </li>
           <li class="nav-item">
-            <a href="band/daftar" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
+            <a href="{{ route('band.daftar') }}" class="nav-link">
+             <i class="nav-icon fas fa-drum" ></i>
               <p>
                 Buat Band
-                <span class="right badge badge-danger">Yes</span>
               </p>
             </a>
           </li>
           <li class="nav-item">
             <a href="{{ route('band.tentang') }}" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
+              <i class="nav-icon fas fa-record-vinyl"></i>
               <p>
                 Band Saya
               </p>
@@ -69,7 +68,7 @@
             <a href="{{ route('logout') }}" class="nav-link"
             onclick="event.preventDefault();
                          document.getElementById('logout-form').submit();">
-              <i class="nav-icon fas fa-th"></i>
+              <i class="nav-icon fas fa-sign-out-alt"></i>
               
               <p>
                 Logout

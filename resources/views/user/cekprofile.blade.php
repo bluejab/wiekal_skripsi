@@ -176,7 +176,7 @@
               <div class="card-body box-profile">
                 <div class="text-center">
                   <img class="profile-user-img img-fluid img-circle"
-                       src="{{ Auth::user()->fotoprofil }}"
+                       src="{{ $user->fotoprofil }}"
                        alt="User profile picture">
                 </div>
 
@@ -208,7 +208,7 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <strong><i class="fas fa-book mr-1"></i> Email</strong>
+                <strong><i class="fas fa-envelope mr-1"></i> Email</strong>
 
                 <p class="text-muted">
                 {{$user->email}}
@@ -216,7 +216,7 @@
 
                 <hr>
 
-                <strong><i class="fas fa-book mr-1"></i> No.Hp</strong>
+                <strong><i class="fas fa-phone-square-alt mr-1"></i> No.Hp</strong>
 
                 <p class="text-muted">
                 {{$user->phone}}

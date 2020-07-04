@@ -103,10 +103,10 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="gender" class="col-md-4 col-form-label text-md-right">{{ __('Kelamin') }}</label>
+                            <label for="gender" class="col-md-4 col-form-label text-md-right">{{ __(' Jenis Kelamin') }}</label>
 
                             <div class="col-md-6">
-                                <input id="gender" type="radio" value= "Male"  name="gender" required> Male
+                                <input id="gender" type="radio" value= "Male"  name="gender" required> Male⠀
                                 <input id="gender" type="radio" value= "Female" name="gender" required> Female
 
                                 @error('gender')
@@ -118,7 +118,7 @@
                         </div>  
 
                         <div class="form-group row">
-                            <label for="alatmusik" class="col-md-4 col-form-label text-md-right">{{ __('Alat Musik') }}</label>
+                            <label for="alatmusik" class="col-md-4 col-form-label text-md-right">{{ __('Keahlian') }}</label>
 
                             <div class="col-md-6">
                             <select name="alatmusik" id="alatmusik">
@@ -135,7 +135,7 @@
                         </div> 
 
                         <div class="form-group row">
-                            <label for="genre" class="col-md-4 col-form-label text-md-right">{{ __('Genre musik yang dimainkan') }}</label>
+                            <label for="genre" class="col-md-4 col-form-label text-md-right">{{ __('Genre musik favorit') }}</label>
 
                             <div class="col-md-6">
                             <select name="genre" id="genre">
@@ -171,7 +171,7 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-primary float-right">
                                     {{ __('Register') }}
                                 </button>
                             </div>

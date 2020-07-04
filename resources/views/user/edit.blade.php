@@ -4,18 +4,15 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet">
-        <title>Tutorial Laravel #21 : CRUD Eloquent Laravel - www.malasngoding.com</title>
+        <title>My Band</title>
     </head>
     <body>
         <div class="container">
             <div class="card mt-5">
                 <div class="card-header text-center">
-                    PROFILE - <strong>UBAH DATA</strong> - <a href="https://www.malasngoding.com/category/laravel" target="_blank">www.malasngoding.com</a>
+                    PROFILE - <strong>UBAH DATA</strong>
                 </div>
                 <div class="card-body">
-                    <a href="/band" class="btn btn-primary">Kembali</a>
-                    <br/>
-                    <br/>
                     
                     <form method="post" action="{{ route('profile.update', $user->id) }}" enctype="multipart/form-data">
 
@@ -91,10 +88,10 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="gender" class="col-md-4 col-form-label text-md-right">{{ __('Kelamin') }}</label>
+                            <label for="gender" class="col-md-4 col-form-label text-md-right">{{ __('Jenis Kelamin') }}</label>
 
                             <div class="col-md-6">
-                                <input id="gender" type="radio" value= "Male" name="gender" {{$user->gender == "Male" ? 'checked' : ''}} required> Male
+                                <input id="gender" type="radio" value= "Male" name="gender" {{$user->gender == "Male" ? 'checked' : ''}} required> Male⠀
                                 <input id="gender" type="radio" value= "Female" name="gender" {{$user->gender == "Female" ? 'checked' : ''}} required> Female
 
                                 @error('gender')
@@ -106,7 +103,7 @@
                         </div>  
 
                         <div class="form-group row">
-                            <label for="alatmusik" class="col-md-4 col-form-label text-md-right">{{ __('Alat Musik') }}</label>
+                            <label for="alatmusik" class="col-md-4 col-form-label text-md-right">{{ __('Keahlian') }}</label>
 
                             <div class="col-md-6">
                             <select name="alatmusik" id="alatmusik">
@@ -123,7 +120,7 @@
                         </div> 
 
                         <div class="form-group row">
-                            <label for="genre" class="col-md-4 col-form-label text-md-right">{{ __('Genre musik yang dimainkan') }}</label>
+                            <label for="genre" class="col-md-4 col-form-label text-md-right">{{ __('Genre musik favorit') }}</label>
 
                             <div class="col-md-6">
                             <select name="genre" id="genre">
@@ -158,7 +155,7 @@
 
 
                         <div class="form-group">
-                            <input type="submit" class="btn btn-warning" value="Ubah">
+                            <input type="submit" class="btn btn-warning float-right" value="Ubah">
                         </div>
 
                     </form>

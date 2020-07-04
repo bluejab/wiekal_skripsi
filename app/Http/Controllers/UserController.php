@@ -12,6 +12,7 @@ class UserController extends Controller
     public function edit()
     {
        $user = auth()->user();
+       $anggotaband = $user->AnggotaBandId;
        $alatMusik = AlatMusik::all();
        $genreMusik = Genre::all();
        return view('user/edit',['user' =>$user, 'alatMusik' => $alatMusik, 'genreMusik' => $genreMusik]);

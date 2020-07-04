@@ -17,6 +17,7 @@ class CreateAnggotaBandTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('band_id');
+            $table->unsignedBigInteger('alatmusik_id');
             $table->timestamps();
         });
     }

@@ -24,6 +24,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/home/apply/{id}', 'HomeController@apply');
+Route::get('/keluar', 'BandController@keluar');
 
 route::get('/markasread', 'HomeController@MarkAsRead');
 
@@ -31,8 +32,7 @@ route::get('/markasread', 'HomeController@MarkAsRead');
 
 Route::group(['prefix' => 'band', 'middleware' => 'auth'], function() {
     route::get('','BandController@index');
-    route::get('/sidebar2','BandController@sidebar2')->name('band.sidebar2');
-    route::get('/daftar','BandController@daftar');
+    route::get('/daftar','BandController@daftar')->name('band.daftar');
     Route::post('/store', 'BandController@store');
     route::get('/bandsaya','BandController@bandsaya')->name('band.saya');
     route::get('/buatacara','BandController@buatacara')->name('band.buatacara');
@@ -41,7 +41,7 @@ Route::group(['prefix' => 'band', 'middleware' => 'auth'], function() {
     route::get('/anggota','BandController@anggota')->name('band.anggota');
     route::get('/editband','BandController@editband')->name('band.edit');
     route::post('/update/{id}','BandController@update')->middleware('auth')->name('band.update');
-    route::get('/seleksi','BandController@seleksianggota');
+    route::get('/seleksi','BandController@seleksianggota')->name('band.seleksi');
     route::get('/carianggota','BandController@carianggota')->name('band.carianggota');
     Route::post('/posting', 'BandController@posting');
     route::get('/tentang','BandController@tentang')->name('band.tentang');

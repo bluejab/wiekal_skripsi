@@ -8,6 +8,8 @@ class Acara extends Model
 {
     protected $table = 'acara';
 
+    protected $dates = ['tanggal'];
+
     protected $fillable = ['band_id','jenis_acara','lokasi','tanggal','waktu_mulai','waktu_selesai'];
 
     public function getBandId()
