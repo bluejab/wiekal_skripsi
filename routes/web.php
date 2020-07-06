@@ -25,6 +25,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/home/apply/{id}', 'HomeController@apply');
 Route::get('/keluar', 'BandController@keluar');
+Route::get('/bubar', 'BandController@bubar');
 
 route::get('/markasread', 'HomeController@MarkAsRead');
 
@@ -47,7 +48,8 @@ Route::group(['prefix' => 'band', 'middleware' => 'auth'], function() {
     route::get('/tentang','BandController@tentang')->name('band.tentang');
     Route::get('/seleksi/tolak/{id}','BandController@tolak')->name('seleksi.tolak');
     Route::post('/seleksi/terima/{id}','BandController@terima')->name('seleksi.terima');
-
+    route::get('/waris','BandController@waris')->name('band.waris');
+    Route::post('/waris/simpanketua', 'BandController@gantiketua')->name('waris.simpanketua');
 });
 
 
@@ -61,4 +63,37 @@ Route::post('/files','UserController@store');
 
 Route::get('/profile/ruanganku/{id}','UserController@cekprofile');
 
+
+
+
+
+// <div class="card card-success">
+// <div class="card-header">
+//     <h3 class="card-title">iCheck Bootstrap - Checkbox &amp; Radio Inputs</h3>
+// </div>
+// <div class="card-body">
+//     <!-- Minimal style -->
+//     @foreach($anggota as $data)
+//     <div class="row">     
+//     <div class="col-sm-6">
+//         <!-- radio -->
+//         <div class="form-group clearfix">
+//         <div class="icheck-primary d-inline">             
+//             <input type="radio" id="radioPrimary1" name="r1" checked>            
+//             <label for="radioPrimary1">
+//                 {{$data->getUserId->name}}
+//             </label>                    
+//         </div>                 
+//         </div>
+        
+//     </div>
+//     </div>
+// @endforeach
+// </div>
+// <!-- /.card-body -->
+// </div>
+// <!-- /.card-body -->
+
+// <!-- /.card-footer-->
+// </div>
 

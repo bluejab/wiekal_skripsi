@@ -20,7 +20,7 @@
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
           @foreach(Auth::user()->unreadNotifications as $notification)    
           <div class="dropdown-divider"></div>      
-          <a href="{{ route('band.carianggota') }}" class="dropdown-item">
+          <a href="{{ route('band.seleksi') }}" class="dropdown-item">
             <!-- Message Start -->
             <div class="media">
               <img src="{{$notification->data['user_photo']}}" alt="User Avatar" class="img-size-50 img-circle mr-3">

@@ -212,7 +212,15 @@ class BandController extends Controller
     {   
         $user = auth()->user()->band->id;
         $calon = LamaranAnggota::where('band_id',$user)->get();
-       return view('band.seleksianggota', ['calon' => $calon]);
+        $data = [];
+        $user = auth()->user();
+        $band= $user->band;
+        if($band !== NULL){
+            $data['ketua'] = TRUE;
+            $data['userBand'] = $band;
+        }
+        $data['calon'] =$calon;
+        return view('band.seleksianggota', $data);
     }
 
     public function tolak($id)
@@ -255,9 +263,18 @@ class BandController extends Controller
     {
         
         $alatMusik = AlatMusik::all();
+        $data = [];
+        $user = auth()->user();
+        $band= $user->band;
+        if($band !== NULL){
+            $data['ketua'] = TRUE;
+            $data['userBand'] = $band;
+        }
         $bandId = auth()->user()->band->id;
         $cari_anggota = CariAnggota::where('band_id',$bandId)->pluck('alatmusik_id');
-        return view('band.carianggota', ['alatMusik' => $alatMusik],['cari' => $cari_anggota]);
+        $data['alatMusik'] = $alatMusik;
+        $data['cari'] = $cari_anggota;
+        return view('band.carianggota', $data);
     
     }
     public function posting(Request $request)
@@ -301,9 +318,79 @@ class BandController extends Controller
     public function keluar()
     {
         $user= auth()->user();
-        $keluar = AnggotaBand::where('user_id',$user->id)->delete();
-        return redirect(route('home'));
+        $cekrole = Band::where('user_id',$user->id)->first();
+        if($cekrole){
+            return 'ngentod skouyyy';
+            // return view modal radio button anggota
+        }
+        else{
+            $out = AnggotaBand::where('user_id',$user->id)->first();
+            $out->delete();
+            return redirect(route('home'));
+        }
+    }
+
+    public function bubar()
+    {   
+        $user= auth()->user();
+        $bubar = AnggotaBand::where('band_id',$user->band->id)->get();
+
+        foreach($bubar as $bubarr){
+            $bubarr->Delete();
+        }
+
+        Band::where('user_id',$user->id)->delete();
+        return redirect(route('home'));       
     }
   
+    public function waris()
+    {   
+        $user= auth()->user();
+        $anggota = AnggotaBand::where('band_id',$user->band->id)->get();
+
+        return view('band.waris',['anggota' => $anggota]);
+        
+    }
+
+    public function gantiketua(request $request)
+    {   
+        
+        $this->validate($request,[
+ 
+            'daftar_anggota' => 'required',       
+        ]);
+
+        $user = auth()->user()->id;
+        $bandId = Band::where('user_id',$user)->first();
+
+        $bandId->user_id = $request->daftar_anggota;
+
+        $bandId->save();
+        
+        return redirect('/home')-> with ('sukses', 'Data berhasil diupdate');
+
+        // $userId = auth()->user()->id;
+        // $bandId = auth()->user()->id;
+        // $this->validate($request,[
+ 
+        //     'daftar_anggota' => 'required',       
+        // ]);
+
+        // foreach($request->daftar_anggota as $calonketua){
+        //     $ubahKetua = new AnggotaBand;
+
+        //     $ubahKetua->user_id = $userId;
+
+        //     $ubahKetua->band_id = $calonketua;
+
+        //     $ubahKetua->alatmusik_id = $calonketua;
+    
+        //     $ubahKetua->save(); 
+        // }
+
+        // return $ubahketua;
+        
+    }
+    
     
 }
