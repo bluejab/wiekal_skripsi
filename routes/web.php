@@ -16,7 +16,7 @@ use App\User;
 */
 
 Route::get('/', function () {
-    return "hahahah";
+    return view('welcome');
 });
 
 Auth::routes();
