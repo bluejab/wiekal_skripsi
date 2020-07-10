@@ -93,7 +93,7 @@
                           <h5><span class="badge badge-danger">{{$anggota->getUserId->AnggotaBandId->alatMusik->nama_alat_musik}}</span></h5>
                       </td>
                       <td class="project-actions text-right">
-                          <a class="btn btn-info btn-sm" href="/profile/ruanganku/{{$anggota->getUserId->id}}">
+                          <a class="btn btn-info btn-sm" href="/profile/band/ruanganku/{{$anggota->getUserId->id}}">
                           <i class="fas fa-house-user"></i>
                               Kunjungi
                           </a>                        

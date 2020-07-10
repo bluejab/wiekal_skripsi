@@ -57,7 +57,8 @@ Route::group(['prefix' => 'profile'], function() {
     route::get('/edit','UserController@edit')->middleware('auth')->name('profile.edit');
     route::post('/{id}/update','UserController@update')->middleware('auth')->name('profile.update');
     Route::get('/ruanganku', 'UserController@create')->name('profile.ruanganku');
-    Route::get('/ruanganku/{id}','UserController@cekprofile')->name('profile.cekruangan');
+    Route::get('/band/ruanganku/{id}','UserController@cekprofile')->name('profile.cekruangan');
+    Route::get('/home/ruanganku/{id}','UserController@cekprofileU')->name('profile.cekruanganhome');
 });
 
 Route::post('/files','UserController@store');

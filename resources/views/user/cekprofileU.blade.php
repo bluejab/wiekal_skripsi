@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>My Band</title>
+  <title>AdminLTE 3 | User Profile</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -30,8 +30,23 @@
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-   <br>
-   <!-- Main content -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Profile</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">User Profile</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
         <div class="row">
@@ -42,23 +57,23 @@
               <div class="card-body box-profile">
                 <div class="text-center">
                   <img class="profile-user-img img-fluid img-circle"
-                       src="{{ Auth::user()->fotoprofil }}"
+                       src="{{ $user->fotoprofil }}"
                        alt="User profile picture">
                 </div>
 
-                <h3 class="profile-username text-center">{{ Auth::user()->name }}</h3>
+                <h3 class="profile-username text-center">{{ $user->name }}</h3>
 
-                <p class="text-muted text-center">{{Auth::user()->alatMusik->nama_alat_musik}}</p>
+                <p class="text-muted text-center">{{$user->alatMusik->nama_alat_musik}}</p>
 
                 <ul class="list-group list-group-unbordered mb-3">
                   <li class="list-group-item">
-                    <b>Jenis Kelamin</b> <a class="float-right">{{Auth::user()->gender}}</a>
+                    <b>Jenis Kelamin</b> <a class="float-right">{{$user->gender}}</a>
                   </li>
                   <li class="list-group-item">
-                    <b>Umur</b> <a class="float-right">{{Auth::user()->umur}}</a>
+                    <b>Umur</b> <a class="float-right">{{$user->umur}}</a>
                   </li>
                   <li class="list-group-item">
-                    <b>Genre Kesukaan</b> <a class="float-right">{{Auth::user()->genreMusik->nama_genre}}</a>
+                    <b>Genre Kesukaan</b> <a class="float-right">{{$user->genreMusik->nama_genre}}</a>
                   </li>                 
                 </ul>
 
@@ -77,22 +92,22 @@
                 <strong><i class="fas fa-envelope mr-1"></i> Email</strong>
 
                 <p class="text-muted">
-                {{Auth::user()->email}}
+                {{$user->email}}
                 </p>
 
                 <hr>
 
-                <strong><i class="fas fa-phone-square-alt mr-1"></i>No.Hp</strong>
+                <strong><i class="fas fa-phone-square-alt mr-1"></i> No.Hp</strong>
 
                 <p class="text-muted">
-                {{Auth::user()->phone}}
+                {{$user->phone}}
                 </p>
 
                 <hr>
 
                 <strong><i class="fas fa-map-marker-alt mr-1"></i> Lokasi</strong>
 
-                <p class="text-muted"> {{Auth::user()->kota}}</p>
+                <p class="text-muted"> {{$user->kota}}</p>
 
                 <hr>
                 
@@ -104,14 +119,6 @@
           <!-- /.col -->
           <div class="col-md-9">
             <div class="card">
-              <div class="card-header p-2">
-              <form action="/files" method="POST" enctype="multipart/form-data" name="hahah" id="hahah">
-                  @csrf
-                    <input type="text" name="keterangan" placeholder = "keterangan">
-                    <input type="file" name="file">
-                    <input type="submit" class="btn btn-primary btn-sm" name="submit">
-                </form> 
-              </div><!-- /.card-header -->
               <div class="card-body">
                 <div class="tab-content">
                 @include('user.view')
@@ -131,9 +138,10 @@
   <!-- /.content-wrapper -->
   <footer class="main-footer">
     <div class="float-right d-none d-sm-block">
-    <strong>&copy; 2020, </strong> Wiekal/15420959
+      <b>Version</b> 3.0.4
     </div>
-    <strong>⠀</strong>
+    <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong> All rights
+    reserved.
   </footer>
 
   <!-- Control Sidebar -->

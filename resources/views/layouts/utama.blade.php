@@ -32,7 +32,7 @@
                <i class="fas fa-user bg-black"></i>
                <div class="timeline-item">
                  <span class="time"><i class="fas fa-clock"></i> {{date("d-m-Y" , strtotime($band->created_at))}}</span>
-                 <h3 class="timeline-header"><a href="/profile/ruanganku/{{$band->user->id}}">{{$band->user->name}}</a> membuat band {{$band->getGenre->nama_genre}}</h3>
+                 <h3 class="timeline-header"><a href="/profile/home/ruanganku/{{$band->user->id}}">{{$band->user->name}}</a> membuat band {{$band->getGenre->nama_genre}}</h3>
 
                  <div class="timeline-body">
                  <img src="{{ $band->logo }}" class="img-fluid img-thumbnail" style="height:60px;width60px;border-radius:50%;margin-right:15px" alt="Band Image">

@@ -40,7 +40,18 @@ class UserController extends Controller
     { 
         $user = auth()->user()->id;
         $data=Ruanganku::where('user_id',$user)->get();
-        return view('user.ruanganku',['data' => $data]);
+
+        $userLogin = auth()->user();
+        $band= $userLogin->AnggotaBandId;
+          if($band !== NULL){
+              $dataa['ketua'] = TRUE;
+              $dataa['userBand'] = $band;
+          }
+  
+          $dataa['data'] = $data;
+          $dataa['user'] = $user;
+
+        return view('user.ruanganku',$dataa);
     }
     
     public function store(Request $request)
@@ -65,7 +76,7 @@ class UserController extends Controller
       $data=Ruanganku::where('user_id',$user->id)->get();
 
       $userLogin = auth()->user();
-      $band= $userLogin->band;
+      $band= $userLogin->AnggotaBandId;
         if($band !== NULL){
             $dataa['ketua'] = TRUE;
             $dataa['userBand'] = $band;
@@ -75,6 +86,24 @@ class UserController extends Controller
         $dataa['user'] = $user;
 
       return view ('user.cekprofile',$dataa);
+    }
+
+    public function cekprofileU($id)
+    {
+      $user = \App\User::find($id);
+      $data=Ruanganku::where('user_id',$user->id)->get();
+
+      $userLogin = auth()->user();
+      $band= $userLogin->AnggotaBandId;
+        if($band !== NULL){
+            $dataa['ketua'] = TRUE;
+            $dataa['userBand'] = $band;
+        }
+
+        $dataa['data'] = $data;
+        $dataa['user'] = $user;
+
+      return view ('user.cekprofileU',$dataa);
     }
 
 }

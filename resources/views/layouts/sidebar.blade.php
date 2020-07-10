@@ -48,6 +48,7 @@
               </li>
             </ul>
           </li>
+          @if(Empty($userBand)) 
           <li class="nav-item">
             <a href="{{ route('band.daftar') }}" class="nav-link">
              <i class="nav-icon fas fa-drum" ></i>
@@ -56,6 +57,7 @@
               </p>
             </a>
           </li>
+          @endif
           @if(!Empty($userBand))   
           <li class="nav-item">
             <a href="{{ route('band.tentang') }}" class="nav-link">

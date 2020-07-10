@@ -57,7 +57,7 @@
   <tbody>
   @foreach( $calon as $calonn)
     <tr>
-      <td><a href="/profile/ruanganku/{{$calonn->getUserId->id}}">{{$calonn->getUserId->name}}</td>
+      <td><a href="/profile/band/ruanganku/{{$calonn->getUserId->id}}">{{$calonn->getUserId->name}}</td>
       <td>{{$calonn->getUserId->umur}}</td>
       <td>{{$calonn->getUserId->gender}}</td>
       <td>{{$calonn->getUserId->kota}}</td>
