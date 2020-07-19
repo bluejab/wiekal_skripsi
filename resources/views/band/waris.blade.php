@@ -38,7 +38,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Wariskan kepemilikan band</h1>
+            <h1>Berikan kepemilikan band</h1>
           </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -61,7 +61,6 @@
               @csrf  
               <div class="card-body">
                 @foreach($anggota as $data)
-                  if 
                     <div class="row">     
                     <div class="col-sm-6">
                         <!-- radio -->

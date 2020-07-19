@@ -1,12 +1,13 @@
 @component('mail::message')
-# Selamat
+# Congratulations
 
-Kamu telah diterima menjadi anggota Band. Silahkan tekan tombol dibawah ini untuk langsung akses ke halaman band kamu :)
+Kamu akhirnya menjadi seorang anggota Band. <br>
+Silahkan tekan tombol dibawah ini untuk langsung akses ke halaman band kamu
 
 @component('mail::button', ['url' => ''])
-Button Text
+Let's Go
 @endcomponent
 
 Thanks,<br>
-{{ config('app.name') }}
+My Band
 @endcomponent

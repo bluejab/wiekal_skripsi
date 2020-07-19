@@ -11,6 +11,11 @@
     .modal-backdrop {
       z-index: -1;
       }
+
+    .modal-header {
+    background-color:#4682B4;
+    color: white;
+}
     </style>
     <!-- Sidebar -->
     <div class="sidebar">
@@ -56,15 +61,15 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ route('band.waris') }}" class="nav-link">
-                  <i class="far fa-circle nav-icon" style="color:yellow"></i>
-                  <p>Wariskan</p>
-                </a>
-              </li>
-              <li class="nav-item">
                 <a href="{{ route('band.edit') }}" class="nav-link">
                   <i class="far fa-circle nav-icon" style="color:darkorange"></i>
                   <p>Edit Band</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('band.waris') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon" style="color:yellow"></i>
+                  <p>Ganti Pemimpin</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -76,7 +81,7 @@
                     <div class="modal-dialog modal-dialog-centered" role="document">
                       <div class="modal-content">
                         <div class="modal-header">
-                          <h5 class="modal-title" id="exampleModalLongTitle2"><i class="nav-icon fas fa-exclamation-triangle" style="color:red"></i></h5>
+                          <h5 class="modal-title" id="exampleModalLongTitle2"><strong>Confirm</strong></h5>
                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                           </button>
@@ -86,8 +91,7 @@
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                          <a href="/bubar" class="btn btn-primary">Iya</a>
-                        
+                          <a href="/bubar" class="btn btn-primary">Iya</a>                       
                         </div>
                       </div>
                     </div>
@@ -128,6 +132,7 @@
               </p>
             </a>
           </li>
+          @if(!Empty($ketua))
           <li class="nav-item">
             <a href="band/daftar" class="nav-link" data-toggle="modal" data-target="#exampleModalCenter">
             <i class="nav-icon fas fa-running"></i>
@@ -140,7 +145,37 @@
                   <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                       <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLongTitle"><i class="nav-icon fas fa-exclamation-triangle" style="color:red"></i></h5>
+                        <h5 class="modal-title" id="exampleModalLongTitle"><strong>Attention Required</strong></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        Pindahkan kepemilikan band terlebih dahulu sebelum keluar
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                        <a href="{{ route('band.waris') }}" class="btn btn-primary">Lanjut</a>
+                       
+                      </div>
+                    </div>
+                  </div>
+                </div>  
+          </li>
+          @else
+          <li class="nav-item">
+            <a href="band/daftar" class="nav-link" data-toggle="modal" data-target="#exampleModalCenter">
+            <i class="nav-icon fas fa-running"></i>
+            <p>
+                Keluar Band
+              </p>
+            </a>
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header" bg>
+                        <h5 class="modal-title" id="exampleModalLongTitle" ><strong>Confirm</strong></h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                           <span aria-hidden="true">&times;</span>
                         </button>
@@ -158,6 +193,7 @@
                 </div>
    
           </li>
+          @endif
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

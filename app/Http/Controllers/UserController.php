@@ -63,7 +63,18 @@ class UserController extends Controller
     {
       $user = \App\User::find($id);
       $data=Ruanganku::where('user_id',$user->id)->get();
-      return view ('user.cekprofile',['user'=>$user,'data' => $data]);
+
+      $userLogin = auth()->user();
+      $band= $userLogin->band;
+        if($band !== NULL){
+            $dataa['ketua'] = TRUE;
+            $dataa['userBand'] = $band;
+        }
+
+        $dataa['data'] = $data;
+        $dataa['user'] = $user;
+
+      return view ('user.cekprofile',$dataa);
     }
 
 }

@@ -57,11 +57,12 @@ Route::group(['prefix' => 'profile'], function() {
     route::get('/edit','UserController@edit')->middleware('auth')->name('profile.edit');
     route::post('/{id}/update','UserController@update')->middleware('auth')->name('profile.update');
     Route::get('/ruanganku', 'UserController@create')->name('profile.ruanganku');
+    Route::get('/ruanganku/{id}','UserController@cekprofile')->name('profile.cekruangan');
 });
 
 Route::post('/files','UserController@store');
 
-Route::get('/profile/ruanganku/{id}','UserController@cekprofile');
+
 
 
 

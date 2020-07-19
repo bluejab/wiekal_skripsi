@@ -3,6 +3,13 @@
 @section('content')
 <section class="content-header">
  
+<style>
+  .modal-header {
+  background-color:#F8F8FF;
+  color: white;
+}
+    </style>
+
 </section>
 
    <!-- Main content -->
@@ -62,7 +69,7 @@
            <div class="modal-content">
              <div class="modal-header">
                <h5 class="modal-title" id="exampleModalCenterTitle"><i class="fas fa-circle fa-1x" style="color:crimson"></i>
-               <i class="fas fa-circle fa-1x" style="color:cornflowerblue"></i> <i class="fas fa-circle fa-1x" style="color:khaki"></i>
+               <i class="fas fa-circle fa-1x" style="color:cornflowerblue"></i> <i class="fas fa-circle fa-1x" style="color:darkkhaki"></i>
                
                </h5>
                <button type="button" class="close" data-dismiss="modal" aria-label="Close">

@@ -13,12 +13,21 @@ class GenreSeeder extends Seeder
     public function run()
     {
         $genreMusik = [
+            'Rock',
+            'Hip Hop',
             'Pop',
             'Jazz',
+            'Folk',
+            'Country',
+            'Musical Theatre',
             'Blues',
-            'Rock',
-            'Paper',
-            'Scissors'
+            'Heavy Metal',
+            'Funk',
+            'Electronic music',
+            'Reggae',
+            'Orchestra',
+            'Religious',
+            'Soul',
         ];
 
         foreach( $genreMusik as $data )

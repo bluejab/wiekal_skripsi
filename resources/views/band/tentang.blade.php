@@ -50,14 +50,13 @@
       <div class="card">
         
         <div class="card-body">
-          Nama Band : {{$userBand->nama_band}} <br><br>
-          Kota Asal Band : {{$userBand->kota}} <br><br>
-          Bermain di Genre: {{$userBand->getGenre->nama_genre}} <br><br>
-          Deskripsi mengenai band: {{$userBand->deskripsi}} 
+<pre>
+  <i class="fas fa-arrow-circle-right"></i><strong> Nama Band         :</strong> {{$userBand->nama_band}} <br><br>
+  <i class="fas fa-arrow-circle-right"></i><strong> Domisili Band     :</strong> {{$userBand->kota}} <br><br>
+  <i class="fas fa-arrow-circle-right"></i><strong> Aliran Musik Band :</strong> {{$userBand->getGenre->nama_genre}} <br><br>
+  <i class="fas fa-arrow-circle-right"></i><strong> Deskripsi Band    :</strong> {{$userBand->deskripsi}} 
+</pre>
         </div>
-        <!-- /.card-body -->
-      
-        <!-- /.card-footer-->
       </div>
       <!-- /.card -->
 

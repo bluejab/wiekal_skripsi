@@ -1,8 +1,9 @@
 @component('mail::message')
-# Maaf
+# Sorry
 
-Permintaan kamu untuk bergabung ke band ditolak.
+Permintaan kamu untuk bergabung ke band ditolak. <br>
+Namun jangan putus asa, Better luck next time!
 
 Thanks,<br>
-{{ config('app.name') }}
+My Band
 @endcomponent

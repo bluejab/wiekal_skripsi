@@ -128,12 +128,13 @@ class BandController extends Controller
     public function lihatacara()
     {
         
+        $now= Carbon::now();
         $user = auth()->user()->AnggotaBandId->band_id;
-        $acara = Acara::where('band_id',$user)->get();
+        $acaraBerlangsung = Acara::where('band_id',$user)->where('tanggal','>=',$now->format('Y-m-d'))->get();
+        $acaraLewat = Acara::where('band_id',$user)->where('tanggal','<',$now->format('Y-m-d'))->get();
         $data = [];
         $userr = auth()->user();
         $band= $userr->band;
-
         // foreach ($acara as $acaraa){
         // $newDT = date('Y-m-d H:i:s', strtotime("$acara->tanggal $acara->waktu_mulai"));
         //  }
@@ -152,7 +153,12 @@ class BandController extends Controller
             $data['userBand'] = $band;
         }
 
-        return view('band.lihatacara',$data,['daftaracara' => $acara]);
+        $data['acaraBerlangsung'] = $acaraBerlangsung;
+        $data['acaraLewat'] = $acaraLewat;
+        $data['now'] = $now;
+
+
+        return view('band.lihatacara',$data);
     }
 
     public function anggota()
@@ -247,13 +253,17 @@ class BandController extends Controller
         ]);
         //$tolol = AnggotaBand::find($id); 
         $cekSlotLamaran = AnggotaBand::where('alatmusik_id',$anggota->getUserId->alatmusik)->pluck('alatmusik_id');
-        $hapusSlotLamaran = CariAnggota::where('alatmusik_id',$cekSlotLamaran)->delete();
-        //return $goblok;
         
-        
+        // $hapusSlotLamaran = CariAnggota::where('alatmusik_id',$cekSlotLamaran)->get();
+        CariAnggota::where([
+            'band_id' => $bandId,
+            'alatmusik_id' => $cekSlotLamaran,
+             ])->delete();
+
         Mail::to($anggota->getUserId->email)->send(new TerimaAnggota());
         
-        $idCalon = LamaranAnggota::find($id)->delete();
+        LamaranAnggota::where('user_id',$anggota->getUserId->id)->delete();
+
         return redirect()->back();
 
     }
@@ -346,9 +356,17 @@ class BandController extends Controller
     public function waris()
     {   
         $user= auth()->user();
-        $anggota = AnggotaBand::where('band_id',$user->band->id)->get();
+        $currentOwner = $user->AnggotaBandId->id;
+        $anggota = AnggotaBand::where('band_id',$user->band->id)->get()->except($currentOwner);
+        $band= $user->band;
+        if($band !== NULL){
+            $data['ketua'] = TRUE;
+            $data['userBand'] = $band;
+        }
 
-        return view('band.waris',['anggota' => $anggota]);
+        $data['anggota'] = $anggota;
+
+        return view('band.waris',$data);
         
     }
 
@@ -368,28 +386,7 @@ class BandController extends Controller
         $bandId->save();
         
         return redirect('/home')-> with ('sukses', 'Data berhasil diupdate');
-
-        // $userId = auth()->user()->id;
-        // $bandId = auth()->user()->id;
-        // $this->validate($request,[
- 
-        //     'daftar_anggota' => 'required',       
-        // ]);
-
-        // foreach($request->daftar_anggota as $calonketua){
-        //     $ubahKetua = new AnggotaBand;
-
-        //     $ubahKetua->user_id = $userId;
-
-        //     $ubahKetua->band_id = $calonketua;
-
-        //     $ubahKetua->alatmusik_id = $calonketua;
-    
-        //     $ubahKetua->save(); 
-        // }
-
-        // return $ubahketua;
-        
+   
     }
     
     

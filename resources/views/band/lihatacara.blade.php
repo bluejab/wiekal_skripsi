@@ -44,8 +44,8 @@
           <div class="card">
             <div class="card-body">
               <ul class="nav nav-pills">
-                <li class="nav-item"><a class="nav-link active" href="#berlangsung" data-toggle="tab">Masih Berlangsung</a></li>
-                <li class="nav-item"><a class="nav-link" href="#terjadi" data-toggle="tab">Sudah Terjadi</a></li>
+                <li class="nav-item"><a class="nav-link active" href="#berlangsung" data-toggle="tab">Akan Datang</a></li>
+                <li class="nav-item"><a class="nav-link" href="#terjadi" data-toggle="tab">Telah Berlalu</a></li>
               </ul>
               
               <div class="card-body">
@@ -61,13 +61,13 @@
                         <th>Waktu Selesai</th>
                       </tr>
                       </thead>
-                      @foreach($daftaracara as $acara)
+                      @foreach($acaraBerlangsung as $langsung)
                       <tr>
-                        <td>{{$acara->jenis_acara}}</td>
-                        <td>{{$acara->lokasi}}</td>
-                        <td>{{date("m-d-Y", strtotime($acara->tanggal))}}</td>
-                        <td>{{date("G:i", strtotime($acara->waktu_mulai))}}</td>
-                        <td>{{date("G:i", strtotime($acara->waktu_selesai))}}</td>
+                        <td>{{$langsung->jenis_acara}}</td>
+                        <td>{{$langsung->lokasi}}</td>
+                        <td>{{date("d-m-Y", strtotime($langsung->tanggal))}}</td>
+                        <td>{{date("G:i", strtotime($langsung->waktu_mulai))}}</td>
+                        <td>{{date("G:i", strtotime($langsung->waktu_selesai))}}</td>
                       </tr> 
                       @endforeach
                     </table>
@@ -84,18 +84,13 @@
                         <th>Waktu Selesai</th>
                       </tr>
                       </thead>
-                      @foreach($daftaracara as $acara)
+                      @foreach($acaraLewat as $lewat)
                       <tr>
-                      <td>{{$acara->jenis_acara, '>', Carbon\Carbon::now()}}</td>
-                      <td>{{$acara->lokasi , '>', Carbon\Carbon::now()}}</td>
-                      <td>{{$acara->tanggal , '>', Carbon\Carbon::now()}}</td>
-                      <td>{{$acara->waktu_mulai , '>', Carbon\Carbon::now()}}</td>
-                      <td>{{$acara->waktu_selesai , '>', Carbon\Carbon::now()}}</td>
-                        <!-- <td>{{$acara->jenis_acara}}</td>
-                        <td>{{$acara->lokasi}}</td>
-                        <td>{{date("m-d-Y", strtotime($acara->tanggal))}}</td>
-                        <td>{{date("G:i", strtotime($acara->waktu_mulai))}}</td>
-                        <td>{{date("G:i", strtotime($acara->waktu_selesai))}}</td> -->
+                      <td>{{$lewat->jenis_acara}}</td>
+                        <td>{{$lewat->lokasi}}</td>
+                        <td>{{date("d-m-Y", strtotime($lewat->tanggal))}}</td>
+                        <td>{{date("G:i", strtotime($lewat->waktu_mulai))}}</td>
+                        <td>{{date("G:i", strtotime($lewat->waktu_selesai))}}</td>
                       </tr> 
                       @endforeach
                     </table>

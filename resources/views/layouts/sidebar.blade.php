@@ -56,6 +56,7 @@
               </p>
             </a>
           </li>
+          @if(!Empty($userBand))   
           <li class="nav-item">
             <a href="{{ route('band.tentang') }}" class="nav-link">
               <i class="nav-icon fas fa-record-vinyl"></i>
@@ -64,6 +65,7 @@
               </p>
             </a>
           </li>
+          @endif
           <li class="nav-item">
             <a href="{{ route('logout') }}" class="nav-link"
             onclick="event.preventDefault();

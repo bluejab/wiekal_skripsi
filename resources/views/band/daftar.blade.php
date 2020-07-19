@@ -53,7 +53,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="genre" class="col-md-4 col-form-label text-md-right">{{ __('Aliran musik band') }}</label>
+                            <label for="genre" class="col-md-4 col-form-label text-md-right">{{ __('Aliran musik') }}</label>
 
                             <div class="col-md-6">
                             <select name="genre" id="genre">

@@ -36,57 +36,55 @@
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-              <form method="post" action="/band/posting">
-              {{ csrf_field() }}
-                   <div class="form-group row">
-                            <label for="keahlian_anggota" class="col-md-2 col-form-label text-md-right">{{ __(' Cari  posisi') }}</label>
-                            <div class="col-md-10">
-                            <select name="keahlian_anggota[]" id="keahlian_anggota" class="select2" multiple="multiple" data-placeholder="Pilih yang anda butuh" data-dropdown-css-class="select2-blue" style="width: 100%;">
-                                @foreach ($alatMusik as $item)
-                                  @if( in_array($item->id, $cari->toArray()) )
-                                  @else
-                                    <option value={{$item->id}}>{{ $item->nama_alat_musik }}</option>
-                                  @endif
-                                @endforeach
-                            </select>
-                                @error('keahlian_anggota')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                   </div> 
-                        <div class="form-group">
-                        <input type="submit" class="btn btn-success float-right" value="Post">
-                        </div>
-
-              </form>
-          </div> 
-        </div>
-      </div><!-- /.container-fluid -->
+     
     </section>
 
     <!-- Main content -->
     <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <!-- left column -->
+          <div class="col-md-12">
+            <!-- jquery validation -->
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title"></h3>
+              </div>
 
-      <!-- Default box -->
-      <div class="card">
-      @foreach(explode(',',Auth::user()->band->skill_member) as $skill)
-        <div class="card-header">
-          <h3 class="card-title">{{$skill}}</h3>
+              <form method="post" action="/band/posting">
+                {{ csrf_field() }}
+                <div class="card-body">                
+                  <label>Pilih Posisi yang ingin dicari</label> 
+
+                  <div class="form-group">
+                    <select name="keahlian_anggota[]" id="keahlian_anggota" class="select2" multiple="multiple" data-placeholder="Pilih yang anda butuh" data-dropdown-css-class="select2-blue" style="width: 100%;">
+                        @foreach ($alatMusik as $item)
+                          @if( in_array($item->id, $cari->toArray()) )
+                          @else
+                            <option value={{$item->id}}>{{ $item->nama_alat_musik }}</option>
+                          @endif
+                        @endforeach
+                    </select>
+                    @error('keahlian_anggota')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                  </div>
+                    <button type="submit" class="btn btn-success float-right">Post</button>
+                </div>
+              </form>  
+
+
+
+            </div>
+            <!-- /.card -->
+          </div>
+        </div>
       </div>
-      @endforeach
-     
-      <!-- /.card -->
-
     </section>
-    <!-- /.content -->
   </div>
-  <!-- /.content-wrapper -->
-
+  
   <footer class="main-footer">
     <div class="float-right d-none d-sm-block">
     <strong>&copy; 2020, </strong> Wiekal/15420959
