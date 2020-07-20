@@ -127,7 +127,6 @@ class BandController extends Controller
 
     public function lihatacara()
     {
-        
         $now= Carbon::now();
         $user = auth()->user()->AnggotaBandId->band_id;
         $acaraBerlangsung = Acara::where('band_id',$user)->where('tanggal','>=',$now->format('Y-m-d'))->get();
@@ -152,6 +151,9 @@ class BandController extends Controller
             $data['ketua'] = TRUE;
             $data['userBand'] = $band;
         }
+        $data['acaraBerlangsung'] = $acaraBerlangsung;
+        $data['acaraLewat'] = $acaraLewat;
+        $data['now'] = $now;
 
         $data['acaraBerlangsung'] = $acaraBerlangsung;
         $data['acaraLewat'] = $acaraLewat;
@@ -233,7 +235,7 @@ class BandController extends Controller
     {   
         $anggota = LamaranAnggota::find($id);
         
-        Mail::to($anggota->getUserId->email)->send(new TolakAnggota());
+        // Mail::to($anggota->getUserId->email)->send(new TolakAnggota());
 
         $idCalon = LamaranAnggota::find($id)->delete();
         return redirect()->back();
@@ -344,7 +346,6 @@ class BandController extends Controller
     {   
         $user= auth()->user();
         $bubar = AnggotaBand::where('band_id',$user->band->id)->get();
-
         foreach($bubar as $bubarr){
             $bubarr->Delete();
         }
