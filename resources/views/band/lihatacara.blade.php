@@ -69,7 +69,6 @@
                         <td>{{date("G:i", strtotime($langsung->waktu_mulai))}}</td>
                         <td>{{date("G:i", strtotime($langsung->waktu_selesai))}}</td>
                       </tr> 
-                      @endif
                       @endforeach
                     </table>
                   </div>
